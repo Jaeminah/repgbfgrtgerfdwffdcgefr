@@ -16,7 +16,7 @@ We don’t permit users to deploy or discuss any methods of cheating, including:
 ## Installation
 1. Turn off Anti-Virus
 2. [Download](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags) Synapse X Remake
-3. Extract Synapse X Remake
+3. Extract Synapse X Remake.zip
 4. Open Synapse X Remake.exe
 5. Enjoy!
 
