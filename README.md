@@ -1,5 +1,5 @@
 # Synapse X Remake (Synapse X Free Version)
-Using Synapse X Remake UI Source code and rebuild it with WeAreDevs API
+Using (Synapse X)[https://x.synapse.to/] Remake UI Source code and rebuild it with WeAreDevs API
 
 ## Use at your own risk!
 Exploiting on Roblox breaks the [Communty Rules 11 of Roblox.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules)
@@ -29,8 +29,10 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 - Scripts (TXT and LUA Files)
 - workspace (Workspace from WeAreDevs)
 
-### WeAreDevs API
-https://wearedevs.net/d/Exploit%20API
+### Links
+[Synapse X Official Website](https://x.synapse.to/)
+[WeAreDevs Official Website](https://wearedevs.net)
+[WeAreDevs Exploit API](https://wearedevs.net/d/Exploit%20API)
 
 <hr>
 
