@@ -32,6 +32,7 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 
 ### Website Links
 - [Synapse X Official Website](https://x.synapse.to/)
+- [Synapse X Source Code](https://github.com/Acrillis/SynapseX)
 - [WeAreDevs Official Website](https://wearedevs.net)
 - [WeAreDevs Exploit API](https://wearedevs.net/d/Exploit%20API)
 
