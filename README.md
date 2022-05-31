@@ -3,7 +3,7 @@ Using Synapse X Remake UI Source code and rebuild it with WeAreDevs API
 
 ## Installation
 1. Turn off Anti-Virus
-2. Download Synapse X Remake
+2. [Download Synapse X Remake](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
 3. Extract Synapse X Remake
 4. Open Synapse X Remake.exe
 5. Enjoy!
