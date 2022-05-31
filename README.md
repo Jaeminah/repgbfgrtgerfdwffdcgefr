@@ -23,6 +23,9 @@ We don’t permit users to deploy or discuss any methods of cheating, including:
 ### Virustotal of Synapse X Remake (False Positive)
 https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258fc6fcf99af78b3a13a65b
 
+### How to prevent Account Ban
+- Check what exploits are Updated/Not Patched. [What Exploits Are Online](https://whatexploitsare.online)
+
 ### Main Directories
 - autoexec (Auto Execute from WeAreDevs)
 - bin (Editor and Script Hub)
