@@ -22,17 +22,5 @@ namespace Synapse_X_Remake.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UnlockFps {
-            get {
-                return ((bool)(this["UnlockFps"]));
-            }
-            set {
-                this["UnlockFps"] = value;
-            }
-        }
     }
 }
