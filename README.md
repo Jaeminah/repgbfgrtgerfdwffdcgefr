@@ -1,5 +1,5 @@
 # Synapse X Remake (Synapse X Free Version)
-Using [Synapse X](https://x.synapse.to/) Remake UI Source code and rebuild it with WeAreDevs API
+Using [Synapse X](https://x.synapse.to/) Remake UI Source code and rebuild it with [WeAreDevs API](https://wearedevs.net/d/Exploit%20API)
 
 - [Download Link](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
 
