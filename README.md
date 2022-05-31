@@ -1,5 +1,5 @@
 # Synapse X Remake (Synapse X Free Version)
-Using (Synapse X)[https://x.synapse.to/] Remake UI Source code and rebuild it with WeAreDevs API
+Using [Synapse X](https://x.synapse.to/) Remake UI Source code and rebuild it with WeAreDevs API
 
 ## Use at your own risk!
 Exploiting on Roblox breaks the [Communty Rules 11 of Roblox.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules)
