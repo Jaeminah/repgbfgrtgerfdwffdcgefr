@@ -21,5 +21,7 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 ### WeAreDevs API
 https://wearedevs.net/d/Exploit%20API
 
+<hr>
+
 ### User Interface
 ![Screenshot 2022-05-31 080511](https://user-images.githubusercontent.com/104715127/171070122-70a314f1-626a-44f6-9525-6db623eb19f1.png)
