@@ -24,7 +24,7 @@
 
         <Grid Name="TopBox" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Width="801" Background="#FF3C3C3C"/>
 
-        <Label Name="TitleBox" Content="Synapse X Remake - v1.0.0" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+        <Label Name="TitleBox" Content="Synapse X Remake - v1.0.1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
         <Button Name="CloseButton" Content="X" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Click="CloseButton_Click"/>
         <Button Name="MiniButton" Content="_" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Margin="0,0,22,0" Click="MiniButton_Click"/>
         <Image x:Name="IconBox" Height="24" Width="24" Source="Synapse X Logo.ico" HorizontalAlignment="Left" Margin="6 0 0 0" VerticalAlignment="Center"/>
