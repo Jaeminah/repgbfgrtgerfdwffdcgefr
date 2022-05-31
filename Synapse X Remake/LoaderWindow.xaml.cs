@@ -42,16 +42,25 @@ namespace Synapse_X_Remake
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string ctopmost = File.ReadAllText("./bin/ontopsettings.txt");
-            bool sconvert = bool.Parse(ctopmost);
+            try
+            {
+                string ctopmost = File.ReadAllText("./bin/ontopsettings.txt");
+                bool sconvert = bool.Parse(ctopmost);
 
-            if (sconvert == true)
-            {
-                CTopMost.IsChecked = true;
+                if (sconvert == true)
+                {
+                    CTopMost.IsChecked = true;
+                }
+                else
+                {
+                    CTopMost.IsChecked = false;
+                }
             }
-            else
+            catch
             {
-                CTopMost.IsChecked = false;
+                MessageBox.Show("Something went wrong...\n\nFile path: /bin/ontopsettings.txt/", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+                Application.Current.Shutdown();
             }
 
             var timer1 = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };

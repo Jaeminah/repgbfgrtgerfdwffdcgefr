@@ -41,7 +41,25 @@ namespace Synapse_X_Remake
                 CTopMost.IsChecked = false;
             }
 
-            UnlockBox.IsChecked = Settings.Default.UnlockFps;
+            try
+            {
+                string fpsunlocker = File.ReadAllText("./bin/fpsunlockersettings.txt");
+                bool Sconvert = bool.Parse(fpsunlocker);
+
+                if (Sconvert == true)
+                {
+                    UnlockBox.IsChecked = true;
+                }
+                else
+                {
+                    UnlockBox.IsChecked = false;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong...\n\nFile path: /bin/fpsunlockersettings.txt/", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -52,30 +70,19 @@ namespace Synapse_X_Remake
 
         private void UnlockBox_Checked(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.UnlockFps = UnlockBox.IsChecked.HasValue ? UnlockBox.IsChecked.Value : true;
-            Settings.Default.Save();
-
-            Process[] dunlockfps = Process.GetProcessesByName("FpsUnlocker");
+            Process[] dunlockfps = Process.GetProcessesByName("rbxfpsunlocker");
             if (dunlockfps.Length > 0)
             {
-                foreach (var killunfps in Process.GetProcessesByName("FpsUnlocker"))
-                {
-                    killunfps.Kill();
-                }
-
-                using (Process myProcess = new Process())
-                {
-                    myProcess.StartInfo.FileName = "./bin/FpsUnlocker.exe";
-                    myProcess.StartInfo.CreateNoWindow = true;
-                    myProcess.StartInfo.UseShellExecute = false;
-                    myProcess.Start();
-                }
+                MessageBox.Show(this, "Fps Unlocker is already running.", "Fps Unlocker", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
+                string save = "true";
+                File.WriteAllText("./bin/fpsunlockersettings.txt", save);
+
                 using (Process myProcess = new Process())
                 {
-                    myProcess.StartInfo.FileName = "./bin/FpsUnlocker.exe";
+                    myProcess.StartInfo.FileName = "./bin/rbxfpsunlocker.exe";
                     myProcess.StartInfo.CreateNoWindow = true;
                     myProcess.StartInfo.UseShellExecute = false;
                     myProcess.Start();
@@ -85,10 +92,10 @@ namespace Synapse_X_Remake
 
         private void UnlockBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.UnlockFps = UnlockBox.IsChecked.HasValue ? UnlockBox.IsChecked.Value : false;
-            Settings.Default.Save();
+            string save = "false";
+            File.WriteAllText("./bin/fpsunlockersettings.txt", save);
 
-            foreach (var killunfps in Process.GetProcessesByName("FpsUnlocker"))
+            foreach (var killunfps in Process.GetProcessesByName("rbxfpsunlocker"))
             {
                 killunfps.Kill();
             }
