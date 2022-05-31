@@ -2,11 +2,13 @@
 Using Synapse X Remake UI Source code and rebuild it with WeAreDevs API
 
 ## Use at your own risk!
-Exploiting on Roblox breaks the Communty Rules 21.
+Exploiting on Roblox breaks the [Communty Rules 11 of Roblox.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules)
 ```
+21. Cheating and Exploits.
+
 We don’t permit users to deploy or discuss any methods of cheating, including:
-Using exploits to gain an unfair advantage anywhere on the platform
-Sharing exploits with others or encouraging others to cheat
+- Using exploits to gain an unfair advantage anywhere on the platform
+- Sharing exploits with others or encouraging others to cheat
 ```
 
 
