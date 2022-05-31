@@ -1,6 +1,8 @@
 # Synapse X Remake (Synapse X Free Version)
 Using [Synapse X](https://x.synapse.to/) Remake UI Source code and rebuild it with WeAreDevs API
 
+[Download Link](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
+
 ## Use at your own risk!
 Exploiting on Roblox breaks the [Communty Rules 11.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
 ```
@@ -11,10 +13,9 @@ We don’t permit users to deploy or discuss any methods of cheating, including:
 - Sharing exploits with others or encouraging others to cheat
 ```
 
-
 ## Installation
 1. Turn off Anti-Virus
-2. [Download Synapse X Remake](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
+2. [Download](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags) Synapse X Remake
 3. Extract Synapse X Remake
 4. Open Synapse X Remake.exe
 5. Enjoy!
@@ -29,7 +30,7 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 - Scripts (TXT and LUA Files)
 - workspace (Workspace from WeAreDevs)
 
-### Links
+### Website Links
 [Synapse X Official Website](https://x.synapse.to/)
 [WeAreDevs Official Website](https://wearedevs.net)
 [WeAreDevs Exploit API](https://wearedevs.net/d/Exploit%20API)
