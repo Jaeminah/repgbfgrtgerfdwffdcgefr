@@ -1,4 +1,5 @@
 ## Introducing Synapse X Remake Beta/Testing versions
+- [Download Link](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/releases/tag/v1.0.1-b.1)
 
 ### Synapse X Remake - v1.0.1-b.1
 #### Newly Added
