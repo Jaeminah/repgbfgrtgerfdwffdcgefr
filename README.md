@@ -4,7 +4,7 @@ Using [Synapse X](https://x.synapse.to/) Remake UI Source code and rebuild it wi
 - [Download Link (Official Releases)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
 
 ## Use at your own risk!
-Exploiting on Roblox breaks the [Communty Rules 11.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
+Exploiting on Roblox breaks the [Communty Rules 21.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
 ```
 21. Cheating and Exploits.
 
