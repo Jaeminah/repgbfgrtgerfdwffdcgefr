@@ -1,0 +1,33 @@
+﻿<Window x:Class="Synapse_X_Remake.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Synapse_X_Remake"
+        mc:Ignorable="d"
+        Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Loaded="Window_Loaded" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" Icon="Synapse X Logo.ico" WindowStyle="None" Height="175" Width="271" Background="#FF333333">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="TopBox" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Width="271" Background="#FF3C3C3C">
+            <Label x:Name="TitleBox" Content="Synapse X - Options" HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+            <Image x:Name="IconBox" Source="Synapse X Logo.ico" Height="24" Width="24" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
+        </Grid>
+
+        <TextBlock Text="Remaked by Charlzk" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" FontWeight="DemiBold" Foreground="White"/>
+
+        <CheckBox Name="UnlockBox" Background="#FF3C3C3C" Checked="UnlockBox_Checked" Unchecked="UnlockBox_Unchecked" Content="Unlock FPS" HorizontalAlignment="Center" Margin="0,43,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Width="94" Foreground="White"/>
+        <CheckBox x:Name="KillRoblox" Background="#FF3C3C3C" Checked="KillRoblox_Checked" Content="Kill Roblox" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Width="108" Foreground="White" Margin="88.5,67,0,0"/>
+
+        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,101,0,0" Grid.Row="1" VerticalAlignment="Top" Width="252" Height="30" Foreground="White" Background="#FF3C3C3C"/>
+
+        <CheckBox Name="CTopMost" Content="Top Most" Foreground="White" FontSize="14" Checked="CTopMost_Checked" Unchecked="CTopMost_Unchecked" Opacity="0" Margin="0,0,340,13"/>
+    </Grid>
+</Window>
