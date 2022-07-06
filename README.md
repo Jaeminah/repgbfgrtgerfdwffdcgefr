@@ -2,6 +2,7 @@
 Using [Synapse X](https://x.synapse.to/) UI Source code and rebuild it with [WeAreDevs API](https://wearedevs.net/d/Exploit%20API)
 
 - [Download Link (official releases)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
+- [Synapase X Remake Official github page](https://charlzk05.github.io/Synapse-X-Remake-Synapse-X-Free-Version/)
 
 ## Use at your own risk!
 Exploiting on Roblox breaks the [Communty Rules 21.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
