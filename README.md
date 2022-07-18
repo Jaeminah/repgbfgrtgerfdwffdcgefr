@@ -2,8 +2,8 @@
 Using [Synapse X](https://x.synapse.to/) UI Source code and rebuild it with [WeAreDevs API](https://wearedevs.net/d/Exploit%20API)
 
 - [Download Link (official releases)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
-- [Synapase X Remake Official github page (currently under construction)](https://charlzk05.github.io/Synapse-X-Remake-Synapse-X-Free-Version/)
-- [Charlzk Official Discord Server](https://discord.com/invite/ZFAUX3yTqW)
+- [Synapase X Remake Official github page](https://charlzk05.github.io/Synapse-X-Remake-Synapse-X-Free-Version/)
+- [Charlzk Official discord server](https://discord.com/invite/ZFAUX3yTqW)
 
 ## Use at your own risk!
 Exploiting on Roblox breaks the [Communty Rules 21.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
