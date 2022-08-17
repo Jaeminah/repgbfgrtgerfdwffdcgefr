@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WeAreDevs_API;
 
@@ -34,6 +21,8 @@ namespace Synapse_X_Remake
             InitializeComponent();
         }
 
+        // EVENTS
+
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -42,27 +31,6 @@ namespace Synapse_X_Remake
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string ctopmost = File.ReadAllText("./bin/ontopsettings.txt");
-                bool sconvert = bool.Parse(ctopmost);
-
-                if (sconvert == true)
-                {
-                    CTopMost.IsChecked = true;
-                }
-                else
-                {
-                    CTopMost.IsChecked = false;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Something went wrong...\n\nFile path: /bin/ontopsettings.txt/", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-                Application.Current.Shutdown();
-            }
-
             var timer1 = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             timer1.Start();
             timer1.Tick += (obj, args) =>
@@ -94,16 +62,6 @@ namespace Synapse_X_Remake
                 mainWindow.Show();
                 this.Hide();
             };
-        }
-
-        private void CTopMost_Checked(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = true;
-        }
-
-        private void CTopMost_Unchecked(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = false;
         }
     }
 }

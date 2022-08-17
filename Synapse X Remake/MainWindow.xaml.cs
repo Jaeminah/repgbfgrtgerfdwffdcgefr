@@ -1,26 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-using System.Threading;
-using System.Timers;
-using WeAreDevs_API;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Threading;
+using System.Windows;
+using System.Windows.Input;
+using WeAreDevs_API;
 
 namespace Synapse_X_Remake
 {
@@ -29,7 +15,6 @@ namespace Synapse_X_Remake
     /// </summary>
     public partial class MainWindow : Window
     {
-
         ExploitAPI module = new ExploitAPI();
 
         public MainWindow()
@@ -60,60 +45,13 @@ namespace Synapse_X_Remake
             wb.Navigate(string.Format("file:///{0}/bin/editor.html", System.IO.Directory.GetCurrentDirectory()));
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            MEditor(Monaco);
-
-            string ctopmost = File.ReadAllText("./bin/ontopsettings.txt");
-            bool sconvert = bool.Parse(ctopmost);
-
-            if (sconvert == true)
-            {
-                CTopMost.IsChecked = true;
-            }
-            else
-            {
-                CTopMost.IsChecked = false;
-            }
-
-            DirectoryInfo directory = new DirectoryInfo("./Scripts");
-            FileInfo[] file = directory.GetFiles("*.txt");
-            foreach (FileInfo files in file)
-            {
-                ScriptBox.Items.Add(files.Name);
-            }
-
-            DirectoryInfo directory1 = new DirectoryInfo("./Scripts");
-            FileInfo[] file1 = directory1.GetFiles("*.lua");
-            foreach (FileInfo files1 in file1)
-            {
-                ScriptBox.Items.Add(files1.Name);
-            }
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void MiniButton_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
         private void ExecuteButton_Click(object sender, RoutedEventArgs e)
         {
             string scriptName = "GetText";
             object[] args = new string[0];
             object obj = Monaco.InvokeScript(scriptName, args);
             string script = obj.ToString();
-            module.SendLimitedLuaScript(script);
+            module.SendLuaScript(script);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -131,10 +69,10 @@ namespace Synapse_X_Remake
 
             if (ofd.ShowDialog() == true)
             {
-                string mofd = File.ReadAllText(ofd.FileName);
+                string content = File.ReadAllText(ofd.FileName);
                 Monaco.InvokeScript("SetText", new object[]
                 {
-                    mofd
+                    content
                 });
             }
         }
@@ -145,7 +83,7 @@ namespace Synapse_X_Remake
             ef.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
             if (ef.ShowDialog() == true)
             {
-                module.SendLimitedLuaScript(File.ReadAllText(ef.FileName));
+                module.SendLuaScript(File.ReadAllText(ef.FileName));
             }
         }
 
@@ -156,11 +94,7 @@ namespace Synapse_X_Remake
 
             if (sfd.ShowDialog() == true)
             {
-                Stream s = sfd.OpenFile();
-                StreamWriter sw = new StreamWriter(s);
-                sw.Write(Monaco.InvokeScript("GetText", new object[0]));
-                sw.Close();
-                s.Close();
+                File.WriteAllText(sfd.FileName, Monaco.InvokeScript("GetText", new object[0]).ToString());
             }
         }
 
@@ -195,29 +129,21 @@ namespace Synapse_X_Remake
             }
             else
             {
-
+                // DO NOTHING!
             }
         }
 
         private void ScriptHubButton_Click(object sender, RoutedEventArgs e)
         {
-            ScriptHubButton.Content = "Starting...";
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            timer.Start();
-            timer.Tick += (obj, args) =>
-            {
-                timer.Stop();
-                ScriptHubButton.Content = "Script Hub";
-                ScriptHubWindow scriptHubWindow = new ScriptHubWindow();
-                scriptHubWindow.ShowDialog();
-            };
+            ScriptHubWindow scriptHubWindow = new ScriptHubWindow();
+            scriptHubWindow.ShowDialog();
         }
 
         private void ExecuteItem_Click(object sender, RoutedEventArgs e)
         {
             if (this.ScriptBox.SelectedIndex != -1)
             {
-                module.SendLimitedLuaScript(File.ReadAllText($"Scripts\\{ScriptBox.SelectedItem}"));
+                module.SendLuaScript(File.ReadAllText($"Scripts\\{ScriptBox.SelectedItem}"));
             }
         }
 
@@ -234,7 +160,36 @@ namespace Synapse_X_Remake
 
         private void RefreshItem_Click(object sender, RoutedEventArgs e)
         {
-            ScriptBox.Items.Clear();
+            ScriptBox.Items.Refresh();
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MiniButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void CTopMost_Checked(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = true;
+        }
+
+        private void CTopMost_Unchecked(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = false;
+        }
+
+        // EVENTS
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MEditor(Monaco);
+
+            CTopMost.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
 
             DirectoryInfo directory = new DirectoryInfo("./Scripts");
             FileInfo[] file = directory.GetFiles("*.txt");
@@ -251,14 +206,64 @@ namespace Synapse_X_Remake
             }
         }
 
-        private void CTopMost_Checked(object sender, RoutedEventArgs e)
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.Topmost = true;
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
 
-        private void CTopMost_Unchecked(object sender, RoutedEventArgs e)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            this.Topmost = false;
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
+            {
+                Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+                sfd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
+
+                if (sfd.ShowDialog() == true)
+                {
+                    File.WriteAllText(sfd.FileName, Monaco.InvokeScript("GetText", new object[0]).ToString());
+                }
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.F))
+            {
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua";
+
+                if (ofd.ShowDialog() == true)
+                {
+                    string content = File.ReadAllText(ofd.FileName);
+                    Monaco.InvokeScript("SetText", new object[]
+                    {
+                        content
+                    });
+                }
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.X))
+            {
+                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                ofd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua";
+
+                if (ofd.ShowDialog() == true)
+                {
+                    File.ReadAllText(ofd.FileName);
+                }
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.C))
+            {
+                Monaco.InvokeScript("SetText", new object[]
+                {
+                    ""
+                });
+            }
+        }
+
+        private void Monaco_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            string messageFromOwner = File.ReadAllText("./bin/ace/charlzk.txt");
+            Monaco.InvokeScript("SetText", new object[]
+            {
+                messageFromOwner
+            });
         }
     }
 }

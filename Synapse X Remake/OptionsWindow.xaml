@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Synapse_X_Remake"
         mc:Ignorable="d"
-        Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Loaded="Window_Loaded" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" Icon="Synapse X Logo.ico" WindowStyle="None" Height="175" Width="271" Background="#FF333333">
+        Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Loaded="Window_Loaded" 
+        MouseDown="Window_MouseDown" Icon="Synapse X Logo.ico" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" Height="200" Width="271" Background="#FF333333">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,9 +27,8 @@
 
         <CheckBox Name="UnlockBox" Background="#FF3C3C3C" Checked="UnlockBox_Checked" Unchecked="UnlockBox_Unchecked" Content="Unlock FPS" HorizontalAlignment="Center" Margin="0,43,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Width="94" Foreground="White"/>
         <CheckBox x:Name="KillRoblox" Background="#FF3C3C3C" Checked="KillRoblox_Checked" Content="Kill Roblox" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Width="108" Foreground="White" Margin="88.5,67,0,0"/>
+        <CheckBox x:Name="TopMostBox" Background="#FF3C3C3C" Click="TopMostBox_Click" Checked="TopMostBox_Checked" Unchecked="TopMostBox_Unchecked" Content="Top Most" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Width="108" Foreground="White" Margin="88,90,0,0"/>
 
-        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,101,0,0" Grid.Row="1" VerticalAlignment="Top" Width="252" Height="30" Foreground="White" Background="#FF3C3C3C"/>
-
-        <CheckBox Name="CTopMost" Content="Top Most" Foreground="White" FontSize="14" Checked="CTopMost_Checked" Unchecked="CTopMost_Unchecked" Opacity="0" Margin="0,0,340,13"/>
+        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,128,0,0" Grid.Row="1" VerticalAlignment="Top" Width="252" Height="30" Foreground="White" Background="#FF3C3C3C"/>
     </Grid>
 </Window>

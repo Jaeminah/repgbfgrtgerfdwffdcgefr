@@ -1,20 +1,7 @@
-﻿using Synapse_X_Remake.Properties;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Synapse_X_Remake
 {
@@ -27,46 +14,6 @@ namespace Synapse_X_Remake
         {
             InitializeComponent();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            string ctopmost = File.ReadAllText("./bin/ontopsettings.txt");
-            bool sconvert = bool.Parse(ctopmost);
-
-            if (sconvert == true)
-            {
-                CTopMost.IsChecked = true;
-            }
-            else
-            {
-                CTopMost.IsChecked = false;
-            }
-
-            try
-            {
-                string fpsunlocker = File.ReadAllText("./bin/fpsunlockersettings.txt");
-                bool Sconvert = bool.Parse(fpsunlocker);
-
-                if (Sconvert == true)
-                {
-                    UnlockBox.IsChecked = true;
-                }
-                else
-                {
-                    UnlockBox.IsChecked = false;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Something went wrong...\n\nFile path: /bin/fpsunlockersettings.txt/", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-            }
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
 
         private void UnlockBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -77,9 +24,6 @@ namespace Synapse_X_Remake
             }
             else
             {
-                string save = "true";
-                File.WriteAllText("./bin/fpsunlockersettings.txt", save);
-
                 using (Process myProcess = new Process())
                 {
                     myProcess.StartInfo.FileName = "./bin/rbxfpsunlocker.exe";
@@ -92,9 +36,6 @@ namespace Synapse_X_Remake
 
         private void UnlockBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            string save = "false";
-            File.WriteAllText("./bin/fpsunlockersettings.txt", save);
-
             foreach (var killunfps in Process.GetProcessesByName("rbxfpsunlocker"))
             {
                 killunfps.Kill();
@@ -123,14 +64,62 @@ namespace Synapse_X_Remake
             }
         }
 
-        private void CTopMost_Checked(object sender, RoutedEventArgs e)
+        private void TopMostBox_Checked(object sender, RoutedEventArgs e)
         {
-            this.Topmost = true;
+            TopMost topMost = new TopMost(true);
+            Properties.Settings.Default["TopMost"] = true;
+            Properties.Settings.Default.Save();
         }
 
-        private void CTopMost_Unchecked(object sender, RoutedEventArgs e)
+        private void TopMostBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            this.Topmost = false;
+            TopMost topMost = new TopMost(false);
+            Properties.Settings.Default["TopMost"] = false;
+            Properties.Settings.Default.Save();
+        }
+
+        private void TopMostBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (TopMostBox.IsChecked == true)
+            {
+                var restart = MessageBox.Show("Would you mind to restart to restart the Program?", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (restart == MessageBoxResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    TopMostBox.IsChecked = false;
+                }
+            }
+            else
+            {
+                var restart = MessageBox.Show("Would you mind to restart to restart the Program?", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (restart == MessageBoxResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    TopMostBox.IsChecked = true;
+                }
+            }
+        }
+
+        // EVENTS
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+            TopMostBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

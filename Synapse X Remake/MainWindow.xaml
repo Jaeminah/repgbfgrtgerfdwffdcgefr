@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Synapse_X_Remake"
         mc:Ignorable="d"
-        Title="7e9295405c78b90af86083230b0a3614" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown" ResizeMode="NoResize" UseLayoutRounding="True" Height="355" Width="801" WindowStyle="None" Background="#FF333333" Foreground="#FF333333">
+        Title="7e9295405c78b90af86083230b0a3614" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" 
+        MouseDown="Window_MouseDown" ResizeMode="NoResize" 
+        UseLayoutRounding="True" Height="355" Width="801" WindowStyle="None" 
+        Background="#FF333333" Foreground="#FF333333"
+        PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Grid.Background>
             <ImageBrush x:Name="ImagePath"/>
@@ -24,12 +28,12 @@
 
         <Grid Name="TopBox" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Width="801" Background="#FF3C3C3C"/>
 
-        <Label Name="TitleBox" Content="Synapse X Remake - v1.0.1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+        <Label Name="TitleBox" Content="Synapse X Remake - v1.0.2" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
         <Button Name="CloseButton" Content="X" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Click="CloseButton_Click"/>
         <Button Name="MiniButton" Content="_" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Margin="0,0,22,0" Click="MiniButton_Click"/>
         <Image x:Name="IconBox" Height="24" Width="24" Source="Synapse X Logo.ico" HorizontalAlignment="Left" Margin="6 0 0 0" VerticalAlignment="Center"/>
 
-        <WebBrowser x:Name="Monaco" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="272" Margin="10,4.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="658"/>
+        <WebBrowser x:Name="Monaco" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Left" Height="272" Margin="10,4.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="658" LoadCompleted="Monaco_LoadCompleted"/>
 
         <ListBox Name="ScriptBox" BorderThickness="1" BorderBrush="#FF3C3C3C" HorizontalAlignment="Left" Height="272" Margin="673,4.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="122" Background="#FF3C3C3C" Foreground="White">
             <ListBox.ContextMenu>

@@ -1,19 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WeAreDevs_API;
 
 namespace Synapse_X_Remake
@@ -30,155 +18,126 @@ namespace Synapse_X_Remake
         {
             InitializeComponent();
         }
-        private void DexV2_Selected(object sender, RoutedEventArgs e)
-        {
-            DescriptionBox.Text = "A powerful game explorer GUI. Shows every instance of the game and all their properties. Useful for developers.";
-        }
-
-        private void ESP_Selected(object sender, RoutedEventArgs e)
-        {
-            DescriptionBox.Text = "Simple ESP Works on any games.";
-        }
-
-        private void InfiniteYield_Selected(object sender, RoutedEventArgs e)
-        {
-            DescriptionBox.Text = "Best admin script works on all FE games.";
-        }
-
-        private void Reviz_Selected(object sender, RoutedEventArgs e)
-        {
-            DescriptionBox.Text = "Best admin script works on all FE and FD games.";
-        }
-
-        private void Btools_Selected(object sender, RoutedEventArgs e)
-        {
-            DescriptionBox.Text = "Allows you to edit the world.";
-        }
-
-        private void SimpleExplorer_Selected(object sender, RoutedEventArgs e)
-        {
-            DescriptionBox.Text = "Similar to Dex explorer but much faster and better for free exploits.";
-        }
 
         private void ExecuteButton_Click(object sender, RoutedEventArgs e)
         {
             if (DexExplorer.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Dex Explorer.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
             if (Fly.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Fly.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (Aimbot.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/WRD Aimbot.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (GravitySwitch.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Gravity Switch.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (AntiAFK.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/anti-afk via autofocus.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (DemonfallTrainer.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Demonfall Trainer.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (phatomForcesHitBox.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Demonfall Trainer.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (TimberAutoFarm.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Timber! Autofarm.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (Apoc2Map.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Apoc2 Map Radar.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (WorldZeroKillAura.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/WZKillAura.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (CriticalStrikeGUI.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Critical Strike GUI.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (PFEasyFly.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/PF Easy Fly.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (RoCitizenInfiniteMoney.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/RoCitizens Infinite Money.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (ClickTP.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Click Teleport.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (UniversalESPandAimbot.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Universal ESP + Aimbot.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (WRDESP.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/WRD ESP.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (EzHub.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Ez Hub.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (OwlHub.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/OwlHub.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (InfiniteJump.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Infinite Jump.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
 
             if (InfiniteYield.IsSelected)
             {
                 string script = File.ReadAllText("./bin/script-hub/Infinite Yield.txt");
-                module.SendLimitedLuaScript(script);
+                module.SendLuaScript(script);
             }
         }
 
@@ -308,18 +267,11 @@ namespace Synapse_X_Remake
         {
             string description = "A command line script hub with over 6 years of development";
             DescriptionBox.Text = description;
-
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();        
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            this.Hide();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -327,29 +279,17 @@ namespace Synapse_X_Remake
             WindowState = WindowState.Minimized;
         }
 
-        private void CTopMost_Checked(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = true;
-        }
+        // EVENTS
 
-        private void CTopMost_Unchecked(object sender, RoutedEventArgs e)
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            this.Topmost = false;
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            string ctopmost = File.ReadAllText("./bin/ontopsettings.txt");
-            bool sconvert = bool.Parse(ctopmost);
-
-            if (sconvert == true)
-            {
-                CTopMost.IsChecked = true;
-            }
-            else
-            {
-                CTopMost.IsChecked = false;
-            }
+            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
         }
     }
 }

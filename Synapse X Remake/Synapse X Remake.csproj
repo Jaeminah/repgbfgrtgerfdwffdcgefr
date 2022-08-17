@@ -68,6 +68,7 @@
     <Compile Include="ScriptHubWindow.xaml.cs">
       <DependentUpon>ScriptHubWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Worker\TopMost.cs" />
     <Page Include="AppleStyleScrollBars.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

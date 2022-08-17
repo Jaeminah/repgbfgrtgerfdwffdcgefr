@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Synapse_X_Remake"
         mc:Ignorable="d"
-        Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Height="116.685" Width="418.203" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="Synapse X Logo.ico" WindowStyle="None" Background="#FF333333">
+        Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Height="116.685" Width="418.203"
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="Synapse X Logo.ico" 
+        WindowStyle="None" Background="#FF333333">
     <Grid Height="120" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="418">
         <Grid.Background>
             <ImageBrush x:Name="ImagePath"/>
@@ -26,7 +28,5 @@
 
         <Label Name="StatusBox" Content="Initializing..." HorizontalAlignment="Center" Margin="0,10.2,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <ProgressBar Name="ProgressBox" HorizontalAlignment="Left" Value="0" Height="21" Margin="19,44.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="387"/>
-
-        <CheckBox Name="CTopMost" Content="Top Most" Foreground="White" FontSize="14" Checked="CTopMost_Checked" Unchecked="CTopMost_Unchecked" Opacity="0" Margin="0,0,340,13"/>
     </Grid>
 </Window>
