@@ -27,6 +27,10 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 ### How to prevent Account Ban
 - Check what exploits are Updated/Not Patched. [What Exploits Are Online](https://whatexploitsare.online)
 
+### Some Problems
+- If you encounter this error when loading the MainWindow of the exploit, Right click the message and click **Allow Blocked Content...**
+![image](https://user-images.githubusercontent.com/104715127/185185122-c82c4861-414b-4b69-861e-fbe09d1a13bb.png)
+
 ### Main Directories
 - autoexec (Auto Execute from WeAreDevs)
 - bin (Editor and Script Hub)
