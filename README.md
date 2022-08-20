@@ -4,15 +4,16 @@ Using [Synapse X](https://x.synapse.to/) UI Source code and rebuild it with [WeA
 - [Download Link (official releases)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
 - [Synapase X Remake Official github page](https://charlzk05.github.io/Synapse-X-Remake-Synapse-X-Free-Version/)
 
-## Use at your own risk!
-Exploiting on Roblox breaks the [Communty Rules 21.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
-```
-21. Cheating and Exploits.
+Scroll Down for more information
 
-We don’t permit users to deploy or discuss any methods of cheating, including:
-- Using exploits to gain an unfair advantage anywhere on the platform
-- Sharing exploits with others or encouraging others to cheat
-```
+## Requirements
+- [.NET Framework 4.7.2 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+### For Developers (Visual Studio)
+- Universal Windows Platform Development
+- [.NET Framework 4.7.2 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+- [.NET Framework 4.7.2 Targeting pack](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+
+![image](https://user-images.githubusercontent.com/104715127/185756446-5e6b63ce-0ff9-47b0-b988-9a8c6e1f4674.png)
 
 ## Installation
 1. Turn off Anti-Virus
@@ -31,12 +32,15 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 - If you encounter this editor error when loading the MainWindow of the exploit, Right click the message and click **Allow Blocked Content...**
 ![image](https://user-images.githubusercontent.com/104715127/185185122-c82c4861-414b-4b69-861e-fbe09d1a13bb.png)
 
-### Main Directories
-- autoexec (Auto Execute from WeAreDevs)
-- bin (Editor and Script Hub)
-- logs (Logs from WeAreDevs)
-- Scripts (TXT and LUA Files)
-- workspace (Workspace from WeAreDevs)
+## Use at your own risk!
+Exploiting on Roblox breaks the [Communty Rules 21.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
+```
+21. Cheating and Exploits.
+
+We don’t permit users to deploy or discuss any methods of cheating, including:
+- Using exploits to gain an unfair advantage anywhere on the platform
+- Sharing exploits with others or encouraging others to cheat
+```
 
 ### Website Links
 - [Synapse X Official Website](https://x.synapse.to/)
