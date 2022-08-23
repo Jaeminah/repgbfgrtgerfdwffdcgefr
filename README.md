@@ -16,7 +16,7 @@ Scroll Down for more information
 ![image](https://user-images.githubusercontent.com/104715127/185756446-5e6b63ce-0ff9-47b0-b988-9a8c6e1f4674.png)
 
 ## Installation
-1. Turn off Anti-Virus
+1. Turn off Anti-Virus or allow the Synapse X Remake folder/zip on any anti-virus softwares you have (Recommended)
 2. [Download](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags) Synapse X Remake
 3. Extract Synapse X Remake.zip
 4. Open Synapse X Remake.exe
