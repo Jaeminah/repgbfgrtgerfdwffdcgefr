@@ -18,6 +18,12 @@
 6. **Begin the pull request**
 - Return to your fork on GitHub, and refresh the page. You may see a highlighted area that displays your recently pushed branch
 
+### What to add after cloning the project
+- Download [WeAreDevs API](https://wearedevs.net/d/Exploit%20API) and add into the project reference
+#### Put these on Debug Folder
+- **bin** Folder [bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9402726/bin.zip)
+- **Scripts** Folder
+
 **[LEARN MORE](https://github.com/firstcontributions/first-contributions/blob/main/README.md)**
 
 ### Requirements for Developers (Visual Studio)
