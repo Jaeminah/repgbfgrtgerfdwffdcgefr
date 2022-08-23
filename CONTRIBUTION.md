@@ -1,6 +1,9 @@
 ## Contribution
 - Since the project is open source it means everyone can contribute code to the project.
 
+### Rules
+- You are not allowed to change the exploit API
+
 ### How to contribute?
 1. **Sign into GitHub**
 - Sign into your GitHub account, or if you don't have one.
