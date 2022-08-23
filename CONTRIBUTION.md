@@ -16,7 +16,7 @@
 5. **Upload your project**
 - Upload your changes into your forked repo
 6. **Begin the pull request**
-- Return to your fork on GitHub, and refresh the page. You may see a highlighted area that displays your recently pushed branch
+- Return to your fork on GitHub. You may see a highlighted area that displays your recently pushed branch
 
 ### What to add after cloning the project
 - Download [WeAreDevs API](https://wearedevs.net/d/Exploit%20API) and add into the project reference
