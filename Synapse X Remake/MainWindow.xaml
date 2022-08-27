@@ -28,7 +28,7 @@
 
         <Grid Name="TopBox" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Width="801" Background="#FF3C3C3C"/>
 
-        <Label Name="TitleBox" Content="Synapse X Remake - v1.0.2" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+        <Label Name="TitleBox" Content="Synapse X Remake - v1.0.3" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
         <Button Name="CloseButton" Content="X" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Click="CloseButton_Click"/>
         <Button Name="MiniButton" Content="_" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Margin="0,0,22,0" Click="MiniButton_Click"/>
         <Image x:Name="IconBox" Height="24" Width="24" Source="Synapse X Logo.ico" HorizontalAlignment="Left" Margin="6 0 0 0" VerticalAlignment="Center"/>
@@ -41,6 +41,8 @@
                     <MenuItem Name="ExecuteItem" Header="Execute" Click="ExecuteItem_Click"/>
                     <MenuItem Name="LoadItem" Header="Load to Editor" Click="LoadItem_Click"/>
                     <MenuItem Name="RefreshItem" Header="Refresh" Click="RefreshItem_Click"/>
+                    <Separator/>
+                    <MenuItem Name="ChangeFolderItem" Header="Choose Folder" Click="ChangeFolderItem_Click"/>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
@@ -54,7 +56,5 @@
 
         <Button Name="AttachButton" Click="AttachButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Attach" HorizontalAlignment="Left" Margin="608,281.6,0,0" Grid.Row="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="91" Height="33" Background="#FF3C3C3C" Foreground="White" FontSize="14"/>
         <Button Name="ScriptHubButton" Click="ScriptHubButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Content="Script Hub" HorizontalAlignment="Left" Margin="704,281.6,0,0" Grid.Row="1" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="91" Height="33" Background="#FF3C3C3C" Foreground="White" FontSize="14"/>
-
-        <CheckBox Name="CTopMost" Content="Top Most" Foreground="White" FontSize="14" Checked="CTopMost_Checked" Unchecked="CTopMost_Unchecked" Opacity="0" Margin="0,0,340,13" IsEnabled="False"/>
     </Grid>
 </Window>

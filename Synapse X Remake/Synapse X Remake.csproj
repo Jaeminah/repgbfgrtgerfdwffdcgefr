@@ -62,18 +62,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomFPSWindow.xaml.cs">
+      <DependentUpon>CustomFPSWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LoaderWindow.xaml.cs">
       <DependentUpon>LoaderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScriptHubWindow.xaml.cs">
       <DependentUpon>ScriptHubWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Worker\LegacyInjection.cs" />
+    <Compile Include="Worker\SelectedFolder.cs" />
     <Compile Include="Worker\TopMost.cs" />
     <Page Include="AppleStyleScrollBars.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CheckBoxesStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomFPSWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

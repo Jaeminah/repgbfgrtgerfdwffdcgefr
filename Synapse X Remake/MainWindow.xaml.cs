@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Synapse_X_Remake.Worker;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -108,23 +109,30 @@ namespace Synapse_X_Remake
         {
             if (module.isAPIAttached() == true)
             {
-                MessageBox.Show("Already Attached", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Already Attached", "Exploit is running", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else if (module.isAPIAttached() == false)
             {
-                if (Process.GetProcessesByName("RobloxPlayerBeta").Length > 0)
+                if (LegacyInjection.legacyInjection == true)
                 {
-                    using (Process process = new Process())
-                    {
-                        process.StartInfo.FileName = "./finj.exe";
-                        process.StartInfo.UseShellExecute = false;
-                        process.Start();
-                        Thread.Sleep(1000);
-                    }
+                    module.LegacyLaunchExploit();
                 }
                 else
                 {
-                    MessageBox.Show("Roblox Player is not running!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (Process.GetProcessesByName("RobloxPlayerBeta").Length > 0)
+                    {
+                        using (Process process = new Process())
+                        {
+                            process.StartInfo.FileName = "./finj.exe";
+                            process.StartInfo.UseShellExecute = false;
+                            process.Start();
+                            Thread.Sleep(1000);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Roblox Player is not running!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
             else
@@ -143,7 +151,7 @@ namespace Synapse_X_Remake
         {
             if (this.ScriptBox.SelectedIndex != -1)
             {
-                module.SendLuaScript(File.ReadAllText($"Scripts\\{ScriptBox.SelectedItem}"));
+                module.SendLuaScript(File.ReadAllText($"{SelectedFolder.selectedPath}/{ScriptBox.SelectedItem}"));
             }
         }
 
@@ -153,8 +161,32 @@ namespace Synapse_X_Remake
             {
                 Monaco.InvokeScript("SetText", new object[1]
                 {
-                    File.ReadAllText($"./Scripts/{ScriptBox.SelectedItem}")
+                    File.ReadAllText($"{SelectedFolder.selectedPath}/{ScriptBox.SelectedItem}")
                 });
+            }
+        }
+
+        private void ChangeFolderItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
+            
+            if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SelectedFolder selectedFolder = new SelectedFolder(Path.GetFullPath(folderBrowser.SelectedPath));
+
+                DirectoryInfo directory = new DirectoryInfo(SelectedFolder.selectedPath);
+                FileInfo[] file = directory.GetFiles("*.txt");
+                foreach (FileInfo files in file)
+                {
+                    ScriptBox.Items.Add(files.Name);
+                }
+
+                DirectoryInfo directory1 = new DirectoryInfo(SelectedFolder.selectedPath);
+                FileInfo[] file1 = directory1.GetFiles("*.lua");
+                foreach (FileInfo files in file1)
+                {
+                    ScriptBox.Items.Add(files.Name);
+                }
             }
         }
 
@@ -173,23 +205,13 @@ namespace Synapse_X_Remake
             WindowState = WindowState.Minimized;
         }
 
-        private void CTopMost_Checked(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = true;
-        }
-
-        private void CTopMost_Unchecked(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = false;
-        }
-
         // EVENTS
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             MEditor(Monaco);
 
-            CTopMost.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
 
             DirectoryInfo directory = new DirectoryInfo("./Scripts");
             FileInfo[] file = directory.GetFiles("*.txt");
@@ -247,13 +269,6 @@ namespace Synapse_X_Remake
                 {
                     File.ReadAllText(ofd.FileName);
                 }
-            }
-            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.C))
-            {
-                Monaco.InvokeScript("SetText", new object[]
-                {
-                    ""
-                });
             }
         }
 

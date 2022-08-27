@@ -14,7 +14,7 @@ namespace Synapse_X_Remake
     {
 
         DispatcherTimer Timer = new DispatcherTimer();
-        ExploitAPI api = new ExploitAPI();
+        ExploitAPI exploit = new ExploitAPI();
 
         public LoaderWindow()
         {
@@ -54,7 +54,9 @@ namespace Synapse_X_Remake
             {
                 timer1.Stop();
                 ProgressBox.Value = 100;
-                api.LaunchExploit();
+
+                exploit.LaunchExploit();
+
                 await Task.Delay(500);
                 StatusBox.Content = "Ready to launch!";
                 await Task.Delay(500);
