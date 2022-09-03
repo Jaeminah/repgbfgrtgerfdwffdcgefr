@@ -29,10 +29,18 @@ https://www.virustotal.com/gui/file/166e1ade682235196ad1dd73c56fc2a6d3cc6914258f
 ### How to prevent Account Ban
 - Check what exploits are Updated/Not Patched. [What Exploits Are Online](https://whatexploitsare.online)
 
-### Some issues
+### Some issues and solutions
 - If you encounter this editor error when loading the MainWindow of the exploit, Right click the message and click **Allow Blocked Content...**
 
 ![image](https://user-images.githubusercontent.com/104715127/185185122-c82c4861-414b-4b69-861e-fbe09d1a13bb.png)
+
+- If you encounter this error **"The code execution cannot proceed because VMProtectSDK32.dll was not found"** when opening the exploit, here's how you fix it
+- Download VMProtectSDK32.dll from [DLL-FILES](https://www.dll-files.com/vmprotectsdk32.dll.html)
+-  Navigate to your Synapse X Remake Folder
+- Put the VMProtectSDK32.dll inside your Synapse X Remake Folder
+
+![image](https://user-images.githubusercontent.com/104715127/188278538-2ccdbc42-a0c4-418c-a51f-f4ae27a5cf12.png)
+
 
 ## Use at your own risk!
 Exploiting on Roblox breaks the [Communty Rules 21.](https://en.help.roblox.com/hc/en-us/articles/203313410-Roblox-Community-Rules) of Roblox.
