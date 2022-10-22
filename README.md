@@ -52,6 +52,10 @@ We don’t permit users to deploy or discuss any methods of cheating, including:
 - Sharing exploits with others or encouraging others to cheat
 ```
 
+### Bin File From Oct 22, 2022
+
+[bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843558/bin.zip)
+
 ### Website Links
 - [Synapse X Official Website](https://x.synapse.to/)
 - [Synapse X Source Code](https://github.com/Acrillis/SynapseX)
