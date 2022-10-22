@@ -54,8 +54,8 @@ We don’t permit users to deploy or discuss any methods of cheating, including:
 
 ### Bin and Script File From Oct 22, 2022
 
-[bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843577/bin.zip)
-[Scripts.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843565/Scripts.zip)
+- [bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843577/bin.zip)
+- [Scripts.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843565/Scripts.zip)
 
 ### Website Links
 - [Synapse X Official Website](https://x.synapse.to/)
