@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Synapse_X_Remake.Worker;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -18,9 +17,28 @@ namespace Synapse_X_Remake
     {
         ExploitAPI module = new ExploitAPI();
 
+        public string SelectedPath = "./Scripts";
+
         public MainWindow()
         {
             InitializeComponent();
+            MEditor(Monaco);
+
+            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+
+            DirectoryInfo directory = new DirectoryInfo("./Scripts");
+            FileInfo[] file = directory.GetFiles("*.txt");
+            foreach (FileInfo files in file)
+            {
+                ScriptBox.Items.Add(files.Name);
+            }
+
+            DirectoryInfo directory1 = new DirectoryInfo("./Scripts");
+            FileInfo[] file1 = directory1.GetFiles("*.lua");
+            foreach (FileInfo files1 in file1)
+            {
+                ScriptBox.Items.Add(files1.Name);
+            }
         }
 
         public void MEditor(System.Windows.Controls.WebBrowser wb)
@@ -39,9 +57,9 @@ namespace Synapse_X_Remake
                 registryKey = null;
                 friendlyName = null;
             }
-            catch (Exception)
+            catch (Exception error)
             {
-                System.Windows.MessageBox.Show("Text editor couldn't be initialized! Are you connected to wifi?", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             wb.Navigate(string.Format("file:///{0}/bin/editor.html", System.IO.Directory.GetCurrentDirectory()));
         }
@@ -107,37 +125,32 @@ namespace Synapse_X_Remake
 
         private void AttachButton_Click(object sender, RoutedEventArgs e)
         {
-            if (module.isAPIAttached() == true)
+            if (module.IsUpdated() == false)
             {
-                MessageBox.Show("Already Attached", "Exploit is running", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else if (module.isAPIAttached() == false)
-            {
-                if (LegacyInjection.legacyInjection == true)
+                var msgbox = MessageBox.Show("WeAreDevs is not yet updated, Are you sure you want continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Error);
+
+                if (msgbox == MessageBoxResult.Yes)
                 {
-                    module.LegacyLaunchExploit();
-                }
-                else
-                {
-                    if (Process.GetProcessesByName("RobloxPlayerBeta").Length > 0)
+                    if (module.isAPIAttached() == true)
                     {
-                        using (Process process = new Process())
-                        {
-                            process.StartInfo.FileName = "./finj.exe";
-                            process.StartInfo.UseShellExecute = false;
-                            process.Start();
-                            Thread.Sleep(1000);
-                        }
+                        MessageBox.Show("Already Attached", "Exploit is running", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                     else
                     {
-                        MessageBox.Show("Roblox Player is not running!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        module.LegacyLaunchExploit();
                     }
                 }
             }
             else
             {
-                // DO NOTHING!
+                if (module.isAPIAttached() == true)
+                {
+                    MessageBox.Show("Already Attached", "Exploit is running", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    module.LegacyLaunchExploit();
+                }
             }
         }
 
@@ -151,7 +164,7 @@ namespace Synapse_X_Remake
         {
             if (this.ScriptBox.SelectedIndex != -1)
             {
-                module.SendLuaScript(File.ReadAllText($"{SelectedFolder.selectedPath}/{ScriptBox.SelectedItem}"));
+                module.SendLuaScript(File.ReadAllText($"{SelectedPath}/{ScriptBox.SelectedItem}"));
             }
         }
 
@@ -161,7 +174,7 @@ namespace Synapse_X_Remake
             {
                 Monaco.InvokeScript("SetText", new object[1]
                 {
-                    File.ReadAllText($"{SelectedFolder.selectedPath}/{ScriptBox.SelectedItem}")
+                    File.ReadAllText($"{SelectedPath}/{ScriptBox.SelectedItem}")
                 });
             }
         }
@@ -172,16 +185,16 @@ namespace Synapse_X_Remake
             
             if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                SelectedFolder selectedFolder = new SelectedFolder(Path.GetFullPath(folderBrowser.SelectedPath));
+                SelectedPath = folderBrowser.SelectedPath;
 
-                DirectoryInfo directory = new DirectoryInfo(SelectedFolder.selectedPath);
+                DirectoryInfo directory = new DirectoryInfo(SelectedPath);
                 FileInfo[] file = directory.GetFiles("*.txt");
                 foreach (FileInfo files in file)
                 {
                     ScriptBox.Items.Add(files.Name);
                 }
 
-                DirectoryInfo directory1 = new DirectoryInfo(SelectedFolder.selectedPath);
+                DirectoryInfo directory1 = new DirectoryInfo(SelectedPath);
                 FileInfo[] file1 = directory1.GetFiles("*.lua");
                 foreach (FileInfo files in file1)
                 {
@@ -203,29 +216,6 @@ namespace Synapse_X_Remake
         private void MiniButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
-        }
-
-        // EVENTS
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            MEditor(Monaco);
-
-            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
-
-            DirectoryInfo directory = new DirectoryInfo("./Scripts");
-            FileInfo[] file = directory.GetFiles("*.txt");
-            foreach (FileInfo files in file)
-            {
-                ScriptBox.Items.Add(files.Name);
-            }
-
-            DirectoryInfo directory1 = new DirectoryInfo("./Scripts");
-            FileInfo[] file1 = directory1.GetFiles("*.lua");
-            foreach (FileInfo files1 in file1)
-            {
-                ScriptBox.Items.Add(files1.Name);
-            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -274,11 +264,17 @@ namespace Synapse_X_Remake
 
         private void Monaco_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            string messageFromOwner = File.ReadAllText("./bin/ace/charlzk.txt");
             Monaco.InvokeScript("SetText", new object[]
             {
-                messageFromOwner
+                Properties.Settings.Default["EditorSave"].ToString()
             });
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            object obj = Monaco.InvokeScript("GetText", new string[0]);
+            Properties.Settings.Default["EditorSave"] = obj.ToString();
+            Properties.Settings.Default.Save();
         }
     }
 }

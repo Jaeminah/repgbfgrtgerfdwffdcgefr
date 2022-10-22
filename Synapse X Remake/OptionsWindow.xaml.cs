@@ -1,5 +1,4 @@
-﻿using Synapse_X_Remake.Worker;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -18,6 +17,9 @@ namespace Synapse_X_Remake
         public OptionsWindow()
         {
             InitializeComponent();
+
+            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+            TopMostBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
         }
 
         private void UnlockBox_Checked(object sender, RoutedEventArgs e)
@@ -71,13 +73,11 @@ namespace Synapse_X_Remake
 
         private void TopMostBox_Checked(object sender, RoutedEventArgs e)
         {
-            TopMost topMost = new TopMost(true);
             Properties.Settings.Default["TopMost"] = true;
         }
 
         private void TopMostBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            TopMost topMost = new TopMost(false);
             Properties.Settings.Default["TopMost"] = false;
         }
 
@@ -93,7 +93,7 @@ namespace Synapse_X_Remake
                 }
                 else
                 {
-                    // DO NOTHING
+
                 }
             }
             else
@@ -106,52 +106,9 @@ namespace Synapse_X_Remake
                 }
                 else
                 {
-                    // DO NOTHING
+
                 }
             }
-        }
-
-        private void LegacyInjectionBox_Click(object sender, RoutedEventArgs e)
-        {
-            if (LegacyInjectionBox.IsChecked == true)
-            {
-                MessageBox.Show("You are switching to older version of WeAreDevsAPI some features of this remake might not work.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (restart == MessageBoxResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                    Application.Current.Shutdown();
-                }
-                else
-                {
-                    // DO NOTHING
-                }
-            }
-            else
-            {
-                var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (restart == MessageBoxResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-                    Application.Current.Shutdown();
-                }
-                else
-                {
-                    // DO NOTHING
-                }
-            }
-        }
-
-        private void LegacyInjectionBox_Checked(object sender, RoutedEventArgs e)
-        {
-            LegacyInjection legacyInjection = new LegacyInjection(true);
-            Properties.Settings.Default["LegacyInject"] = LegacyInjectionBox.IsChecked;
-        }
-
-        private void LegacyInjectionBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            LegacyInjection legacyInjection = new LegacyInjection(false);
-            Properties.Settings.Default["LegacyInject"] = LegacyInjectionBox.IsChecked;
         }
 
         private void CustomFPSButton_Click(object sender, RoutedEventArgs e)
@@ -167,28 +124,6 @@ namespace Synapse_X_Remake
             }
         }
 
-        // EVENTS
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
-            TopMostBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
-            LegacyInjectionBox.IsChecked = LegacyInjection.legacyInjection;
-
-            if (LegacyInjection.legacyInjection == true)
-            {
-                CustomFPSButton.IsEnabled = false;
-                CustomFPSButton.Background = new SolidColorBrush(Color.FromRgb(60, 60, 60));
-                CustomFPSButton.Foreground = new SolidColorBrush(Color.FromRgb(160, 160, 160));
-            }
-            else
-            {
-                CustomFPSButton.IsEnabled = true;
-                CustomFPSButton.Background = new SolidColorBrush(Color.FromRgb(60, 60, 60));
-                CustomFPSButton.Foreground = Brushes.White;
-            }
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -198,6 +133,12 @@ namespace Synapse_X_Remake
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Properties.Settings.Default.Save();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            Process.Start(e.Uri.AbsoluteUri);
+            e.Handled = true;
         }
     }
 }

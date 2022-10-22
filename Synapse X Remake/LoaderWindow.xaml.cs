@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Net;
+using System.IO.Compression;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WeAreDevs_API;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Synapse_X_Remake
 {
@@ -16,54 +19,193 @@ namespace Synapse_X_Remake
         DispatcherTimer Timer = new DispatcherTimer();
         ExploitAPI exploit = new ExploitAPI();
 
+        public string binFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843577/bin.zip";
+        public string ScriptsFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843565/Scripts.zip";
+
         public LoaderWindow()
         {
             InitializeComponent();
-        }
 
-        // EVENTS
+            if (exploit.IsUpdated() == true)
+            {
+
+                if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
+                {
+                    StatusBox.Content = "Done!";
+                    ProgressBox.Value = 100;
+
+                    this.Hide();
+                    MainWindow main = new MainWindow();
+                    main.Show();
+                }
+                else
+                {
+                    try
+                    {
+                        using (var client = new WebClient())
+                        {
+                            client.DownloadProgressChanged += binFileDownloadProgress;
+                            client.DownloadFileCompleted += binFileDownloadComplete;
+                            client.DownloadFileAsync(new Uri(binFileUrl), "./bin.zip");
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+            else
+            {
+                var msgbox = MessageBox.Show("WeAreDevs is not yet updated, Are you sure you want continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Error);
+
+                if (msgbox == MessageBoxResult.Yes)
+                {
+                    if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
+                    {
+                        StatusBox.Content = "Done!";
+                        ProgressBox.Value = 100;
+
+                        this.Hide();
+                        MainWindow main = new MainWindow();
+                        main.Show();
+                    }
+                    else
+                    {
+                        try
+                        {
+                            using (var client = new WebClient())
+                            {
+                                client.DownloadProgressChanged += binFileDownloadProgress;
+                                client.DownloadFileCompleted += binFileDownloadComplete;
+                                client.DownloadFileAsync(new Uri(binFileUrl), "./bin.zip");
+                            }
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+        }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 this.DragMove();
+            }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void binFileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
-            var timer1 = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-            timer1.Start();
-            timer1.Tick += (obj, args) =>
-            {
-                timer1.Stop();
-                ProgressBox.Value = 50;
-            };
-
-            Timer.Tick += new EventHandler(Timer_Tick);
-            Timer.Interval = new TimeSpan(0, 0, 3);
-            Timer.Start();
+            StatusBox.Content = $"Downloading Bin ... {e.ProgressPercentage}%";
+            ProgressBox.Value = e.ProgressPercentage;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void binFileDownloadComplete(object sender, EventArgs e)
         {
-            Timer.Stop();
-
-            var timer1 = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            timer1.Start();
-            timer1.Tick += async (obj, args) =>
+            try
             {
-                timer1.Stop();
-                ProgressBox.Value = 100;
+                StatusBox.Content = "Done!";
+                string bin = "./bin";
 
-                exploit.LaunchExploit();
+                if (Directory.Exists(bin))
+                {
+                    DirectoryInfo directory = new DirectoryInfo(bin);
 
-                await Task.Delay(500);
-                StatusBox.Content = "Ready to launch!";
-                await Task.Delay(500);
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                this.Hide();
-            };
+                    foreach (var file in directory.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                    foreach (var subDir in directory.GetDirectories())
+                    {
+                        subDir.Delete(true);
+                    }
+
+                    ZipFile.ExtractToDirectory("./bin.zip", "./");
+                    File.Delete("./bin.zip");
+
+                    using (var client = new WebClient())
+                    {
+                        client.DownloadProgressChanged += scriptsFileDownloadProgress;
+                        client.DownloadFileCompleted += scriptsFileDownloadCompleted;
+                        client.DownloadFileAsync(new Uri(ScriptsFileUrl), "./Scripts.zip");
+                    }
+                }
+                else
+                {
+                    ZipFile.ExtractToDirectory("./bin.zip", "./");
+                    File.Delete("./bin.zip");
+
+                    using (var client = new WebClient())
+                    {
+                        client.DownloadProgressChanged += scriptsFileDownloadProgress;
+                        client.DownloadFileCompleted += scriptsFileDownloadCompleted;
+                        client.DownloadFileAsync(new Uri(ScriptsFileUrl), "./Scripts.zip");
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void scriptsFileDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
+        {
+            StatusBox.Content = $"Downloading Scripts ... {e.ProgressPercentage}%";
+            ProgressBox.Value = e.ProgressPercentage;
+        }
+
+        private void scriptsFileDownloadCompleted(object sender, EventArgs e)
+        {
+            try
+            {
+                StatusBox.Content = "Done!";
+                string scripts = "./Scripts";
+
+                if (Directory.Exists(scripts))
+                {
+                    DirectoryInfo directory = new DirectoryInfo(scripts);
+
+                    foreach (var file in directory.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                    foreach (var subDir in directory.GetDirectories())
+                    {
+                        subDir.Delete(true);
+                    }
+
+                    ZipFile.ExtractToDirectory("./Scripts.zip", "./");
+                    File.Delete("./Scripts.zip");
+
+                    this.Hide();
+                    MainWindow main = new MainWindow();
+                    main.Show();
+                }
+                else
+                {
+                    ZipFile.ExtractToDirectory("./Scripts.zip", "./");
+                    File.Delete("./Scripts.zip");
+
+                    this.Hide();
+                    MainWindow main = new MainWindow();
+                    main.Show();
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Synapse_X_Remake"
         mc:Ignorable="d"
         Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Height="116.685" Width="418.203"
-        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="Synapse X Logo.ico" 
+        WindowStartupLocation="CenterScreen" Icon="Synapse X Logo.ico" MouseDown="Window_MouseDown"
         WindowStyle="None" Background="#FF333333">
     <Grid Height="120" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="418">
         <Grid.Background>
@@ -26,7 +26,7 @@
         <Label Name="TitleBox" Content="Synapse X Remake - Loader" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
         <Image Name="IconBox" Source="Synapse X Logo.ico" Height="24" Width="24" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
 
-        <Label Name="StatusBox" Content="Initializing..." HorizontalAlignment="Center" Margin="0,10.2,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <Label Name="StatusBox" Content="Loading ..." HorizontalAlignment="Center" Margin="0,10.2,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <ProgressBar Name="ProgressBox" HorizontalAlignment="Left" Value="0" Height="21" Margin="19,44.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="387"/>
     </Grid>
 </Window>

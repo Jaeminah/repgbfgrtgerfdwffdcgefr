@@ -37,13 +37,13 @@ namespace Synapse_X_Remake.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LegacyInject {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string EditorSave {
             get {
-                return ((bool)(this["LegacyInject"]));
+                return ((string)(this["EditorSave"]));
             }
             set {
-                this["LegacyInject"] = value;
+                this["EditorSave"] = value;
             }
         }
     }
