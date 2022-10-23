@@ -2,8 +2,9 @@
 
 Using [Synapse X](https://x.synapse.to/) UI Source code and rebuild it with [WeAreDevs API](https://wearedevs.net/d/Exploit%20API)
 
-- [Download Link (official releases)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
+- [Download Link (Official releases)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/tags)
 - [Synapase X Remake Official Github Page](https://charlzk05.github.io/Synapse-X-Remake-Synapse-X-Free-Version/)
+- [Synapse X Remake Server](https://discord.gg/aXrHcQzSPb)
 
 Scroll Down for more information
 
