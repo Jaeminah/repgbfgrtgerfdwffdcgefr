@@ -1,0 +1,36 @@
+{
+    "Main": {
+        "Execute": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "Clear": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "Open": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "ExecuteFile": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "Save": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "Options": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "Attach": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        },
+        "ScriptHub": {
+            "Background": "#FF3C3C3C",
+            "Foreground": "White"
+        }
+    }
+}

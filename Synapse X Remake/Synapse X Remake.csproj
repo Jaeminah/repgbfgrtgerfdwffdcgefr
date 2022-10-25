@@ -80,11 +80,11 @@
     <Compile Include="ScriptHubWindow.xaml.cs">
       <DependentUpon>ScriptHubWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AppleStyleScrollBars.xaml">
+    <Page Include="Resources\AppleStyleScrollBars.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CheckBoxesStyles.xaml">
+    <Page Include="Resources\CheckBoxesStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,7 +112,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RightCornerBoxRemover.xaml">
+    <Page Include="Resources\RightCornerBoxRemover.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

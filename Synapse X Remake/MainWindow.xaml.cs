@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using WeAreDevs_API;
 
 namespace Synapse_X_Remake
@@ -17,15 +19,24 @@ namespace Synapse_X_Remake
     {
         ExploitAPI module = new ExploitAPI();
 
-        public string SelectedPath = "./Scripts";
+        string SelectedPath = "./Scripts";
 
         public MainWindow()
         {
             InitializeComponent();
             MEditor(Monaco);
+            loadThemes();
+            loadSettings();
+            loadScriptBox();
+        }
 
+        private void loadSettings()
+        {
             this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+        }
 
+        private void loadScriptBox()
+        {
             DirectoryInfo directory = new DirectoryInfo("./Scripts");
             FileInfo[] file = directory.GetFiles("*.txt");
             foreach (FileInfo files in file)
@@ -41,7 +52,46 @@ namespace Synapse_X_Remake
             }
         }
 
-        public void MEditor(System.Windows.Controls.WebBrowser wb)
+        private void loadThemes()
+        {
+            BrushConverter converter = new BrushConverter();
+            string ThemeFile = File.ReadAllText("./bin/Theme.json");
+            JObject json = JObject.Parse(ThemeFile);
+
+            var execute = json["Main"]["Execute"];
+            ExecuteButton.Background = (Brush)converter.ConvertFrom(execute["Background"].ToString());
+            ExecuteButton.Foreground = (Brush)converter.ConvertFrom(execute["Foreground"].ToString());
+
+            var Clear = json["Main"]["Clear"];
+            ClearButton.Background = (Brush)converter.ConvertFrom(Clear["Background"].ToString());
+            ClearButton.Foreground = (Brush)converter.ConvertFrom(Clear["Foreground"].ToString());
+
+            var Open = json["Main"]["Open"];
+            OpenFileButton.Background = (Brush)converter.ConvertFrom(Open["Background"].ToString());
+            OpenFileButton.Foreground = (Brush)converter.ConvertFrom(Open["Foreground"].ToString());
+
+            var ExecuteFile = json["Main"]["ExecuteFile"];
+            ExecuteFileButton.Background = (Brush)converter.ConvertFrom(ExecuteFile["Background"].ToString());
+            ExecuteFileButton.Foreground = (Brush)converter.ConvertFrom(ExecuteFile["Foreground"].ToString());
+
+            var Save = json["Main"]["Save"];
+            SaveFileButton.Background = (Brush)converter.ConvertFrom(Save["Background"].ToString());
+            SaveFileButton.Foreground = (Brush)converter.ConvertFrom(Save["Foreground"].ToString());
+
+            var Options = json["Main"]["Options"];
+            OptionsButton.Background = (Brush)converter.ConvertFrom(Options["Background"].ToString());
+            OptionsButton.Foreground = (Brush)converter.ConvertFrom(Options["Foreground"].ToString());
+
+            var Attach = json["Main"]["Attach"];
+            AttachButton.Background = (Brush)converter.ConvertFrom(Attach["Background"].ToString());
+            AttachButton.Foreground = (Brush)converter.ConvertFrom(Attach["Foreground"].ToString());
+
+            var ScriptHub = json["Main"]["ScriptHub"];
+            ScriptHubButton.Background = (Brush)converter.ConvertFrom(ScriptHub["Background"].ToString());
+            ScriptHubButton.Foreground = (Brush)converter.ConvertFrom(ScriptHub["Foreground"].ToString());
+        }
+
+        private void MEditor(System.Windows.Controls.WebBrowser wb)
         {
             WebClient wc = new WebClient();
             wc.Proxy = null;

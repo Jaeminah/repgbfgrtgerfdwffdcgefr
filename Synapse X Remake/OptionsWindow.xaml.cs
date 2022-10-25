@@ -91,10 +91,6 @@ namespace Synapse_X_Remake
                     System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                     Application.Current.Shutdown();
                 }
-                else
-                {
-
-                }
             }
             else
             {
@@ -103,10 +99,6 @@ namespace Synapse_X_Remake
                 {
                     System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                     Application.Current.Shutdown();
-                }
-                else
-                {
-
                 }
             }
         }
