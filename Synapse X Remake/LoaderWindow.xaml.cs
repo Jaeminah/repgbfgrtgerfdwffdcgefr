@@ -26,6 +26,22 @@ namespace Synapse_X_Remake
         {
             InitializeComponent();
 
+            try
+            {
+                CheckNDownload();
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private void CheckNDownload()
+        {
             if (exploit.IsUpdated() == true)
             {
 
@@ -51,7 +67,11 @@ namespace Synapse_X_Remake
                     }
                     catch (Exception error)
                     {
-                        MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                        if (option == MessageBoxResult.No)
+                        {
+                            Application.Current.Shutdown();
+                        }
                     }
                 }
             }
@@ -83,7 +103,11 @@ namespace Synapse_X_Remake
                         }
                         catch (Exception error)
                         {
-                            MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                            if (option == MessageBoxResult.No)
+                            {
+                                Application.Current.Shutdown();
+                            }
                         }
                     }
                 }
@@ -154,7 +178,11 @@ namespace Synapse_X_Remake
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
             }
         }
 
@@ -204,7 +232,11 @@ namespace Synapse_X_Remake
             }
             catch (Exception error)
             {
-                MessageBox.Show(error.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
             }
         }
     }

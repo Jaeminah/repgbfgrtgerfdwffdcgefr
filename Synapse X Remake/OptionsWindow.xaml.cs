@@ -18,6 +18,22 @@ namespace Synapse_X_Remake
         {
             InitializeComponent();
 
+            try
+            {
+                loadSettings();
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private void loadSettings()
+        {
             this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
             TopMostBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
         }

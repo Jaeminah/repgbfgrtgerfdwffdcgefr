@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Synapse_X_Remake"
         mc:Ignorable="d"
         Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Closing="Window_Closing"
-        MouseDown="Window_MouseDown" Icon="Synapse X Logo.ico" WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown" Icon="Resources/Synapse X Logo.ico" WindowStartupLocation="CenterScreen"
         WindowStyle="None" Height="350" Width="327" Background="#FF333333">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,7 +20,7 @@
 
         <Grid x:Name="TopBox" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Width="327" Background="#FF3C3C3C">
             <Label x:Name="TitleBox" Content="Synapse X - Options" HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center" Foreground="White"/>
-            <Image x:Name="IconBox" Source="Synapse X Logo.ico" Height="24" Width="24" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
+            <Image x:Name="IconBox" Source="Resources/Synapse X Logo.ico" Height="24" Width="24" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
         </Grid>
 
         <TextBlock Text="Remaked by Charlzk" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" FontWeight="DemiBold" Foreground="White"/>

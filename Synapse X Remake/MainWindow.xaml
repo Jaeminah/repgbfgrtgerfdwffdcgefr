@@ -8,12 +8,8 @@
         Title="7e9295405c78b90af86083230b0a3614" WindowStartupLocation="CenterScreen" 
         MouseDown="Window_MouseDown" ResizeMode="NoResize" 
         UseLayoutRounding="True" Height="355" Width="801" WindowStyle="None" 
-        Background="#FF333333" Foreground="#FF333333"
-        PreviewKeyDown="Window_PreviewKeyDown" Closing="Window_Closing">
+        Background="#FF333333" PreviewKeyDown="Window_PreviewKeyDown" Closing="Window_Closing">
     <Grid>
-        <Grid.Background>
-            <ImageBrush x:Name="ImagePath"/>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -22,13 +18,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid.LayoutTransform>
-            <ScaleTransform x:Name="ScaleTransform" ScaleX="1.0" ScaleY="1.0" CenterX="1.0" CenterY="1.0" />
-        </Grid.LayoutTransform>
 
         <Grid Name="TopBox" HorizontalAlignment="Stretch" Height="30" Margin="0,0,0,0" VerticalAlignment="Top"  Background="#FF3C3C3C">
-            <Image x:Name="IconBox" Height="24" Width="24" Source="Synapse X Logo.ico" HorizontalAlignment="Left" Margin="6 0 0 0" VerticalAlignment="Center"/>
-            <Label Name="TitleBox" Content="Synapse X Remake - v1.0.4" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+            <Image x:Name="IconBox" Height="24" Width="24" Source="Resources/Synapse X Logo.ico" HorizontalAlignment="Left" Margin="6 0 0 0" VerticalAlignment="Center"/>
+            <TextBlock Name="TitleBox" Text="Loading ..." HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
             <Button Name="CloseButton" Content="X" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Click="CloseButton_Click"/>
             <Button Name="MiniButton" Content="_" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Margin="0,0,22,0" Click="MiniButton_Click"/>
         </Grid>

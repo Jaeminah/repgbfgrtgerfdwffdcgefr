@@ -17,8 +17,8 @@ namespace Synapse_X_Remake
     /// </summary>
     public partial class ScriptHubWindow : Window
     {
-        public static string json = File.ReadAllText("./bin/ScriptHub.json");
-        JObject keyValue = JObject.Parse(json);
+        public static string jsonFile = File.ReadAllText("./bin/ScriptHub.json");
+        JObject json = JObject.Parse(jsonFile);
 
         ExploitAPI module = new ExploitAPI();
 
@@ -26,9 +26,29 @@ namespace Synapse_X_Remake
         {
             InitializeComponent();
 
-            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+            try
+            {
+                loadSettings();
+                loadScripts();
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+        }
 
-            foreach (var i in keyValue["Scripts"])
+        private void loadSettings()
+        {
+            this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+        }
+
+        private void loadScripts()
+        {
+            foreach (var i in json["Scripts"])
             {
                 ScriptBox.Items.Add(i["Title"]);
             }
@@ -42,7 +62,7 @@ namespace Synapse_X_Remake
                 {
                     using (WebClient client = new WebClient())
                     {
-                        string content = client.DownloadString(keyValue["Scripts"][ScriptBox.SelectedIndex]["Content"].ToString());
+                        string content = client.DownloadString(json["Scripts"][ScriptBox.SelectedIndex]["Content"].ToString());
                         module.SendLuaScript(content);
                     }
                 }
@@ -53,9 +73,42 @@ namespace Synapse_X_Remake
             }
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
+            if (ScriptBox.SelectedIndex != -1)
+            {
+                string script = json["Scripts"][ScriptBox.SelectedIndex]["Content"].ToString();
+                Uri uri = new Uri(script, UriKind.Absolute);
+
+                WebClient client = new WebClient();
+                client.DownloadProgressChanged += scriptDownloadProgressChanged;
+                client.DownloadStringCompleted += scriptDownloadCompleted;
+                client.DownloadStringAsync(uri);
+            };
+        }
+
+        private void scriptDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            DownloadButton.Content = $"Downloading ... {e.ProgressPercentage}";
+        }
+
+        private void scriptDownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            try
+            {
+                string title = json["Scripts"][ScriptBox.SelectedIndex]["Title"].ToString();
+
+                File.WriteAllText($"./Scripts/{title}.lua", e.Result);
+                DownloadButton.Content = "Download";
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -72,14 +125,15 @@ namespace Synapse_X_Remake
 
         private void ScriptBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (keyValue["Scripts"][ScriptBox.SelectedIndex]["Img"].ToString() == "")
+            if (json["Scripts"][ScriptBox.SelectedIndex]["Img"].ToString() == "")
             {
                 Uri uri = new Uri("https://i.imgur.com/ArxGPeM.png");
                 var BitmapImage = new BitmapImage();
+                ImageBox.Visibility = Visibility.Hidden;
                 BitmapImage.DownloadProgress += BitmapImage_DownloadProgress;
                 BitmapImage.DownloadCompleted += BitmapImage_DownloadCompleted;
 
-                DescriptionBox.Text = keyValue["Scripts"][ScriptBox.SelectedIndex]["Description"].ToString();
+                DescriptionBox.Text = json["Scripts"][ScriptBox.SelectedIndex]["Description"].ToString();
                 BitmapImage.BeginInit();
                 BitmapImage.UriSource = uri;
                 BitmapImage.EndInit();
@@ -89,12 +143,13 @@ namespace Synapse_X_Remake
             else
             {
                 var BitmapImage = new BitmapImage();
+                ImageBox.Visibility = Visibility.Hidden;
                 BitmapImage.DownloadProgress += BitmapImage_DownloadProgress;
                 BitmapImage.DownloadCompleted += BitmapImage_DownloadCompleted;
 
-                DescriptionBox.Text = keyValue["Scripts"][ScriptBox.SelectedIndex]["Description"].ToString();
+                DescriptionBox.Text = json["Scripts"][ScriptBox.SelectedIndex]["Description"].ToString();
                 BitmapImage.BeginInit();
-                BitmapImage.UriSource = new Uri(keyValue["Scripts"][ScriptBox.SelectedIndex]["Img"].ToString());
+                BitmapImage.UriSource = new Uri(json["Scripts"][ScriptBox.SelectedIndex]["Img"].ToString());
                 BitmapImage.EndInit();
 
                 ImageBox.Source = BitmapImage;
@@ -103,13 +158,19 @@ namespace Synapse_X_Remake
 
         private void BitmapImage_DownloadProgress(object sender, DownloadProgressEventArgs e)
         {
-            ProgressText.Opacity = 1;
-            ProgressText.Text = $"{e.Progress}%";
+            ProgressText.Visibility = Visibility.Visible;
+            ProgressText.Text = $"Loading ... {e.Progress}%";
         }
 
         private void BitmapImage_DownloadCompleted(object sender, EventArgs e)
         {
-            ProgressText.Opacity = 0;
+            ProgressText.Visibility = Visibility.Hidden;
+            ImageBox.Visibility = Visibility.Visible;
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
         }
     }
 }

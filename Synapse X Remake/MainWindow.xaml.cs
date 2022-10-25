@@ -8,6 +8,8 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using WeAreDevs_API;
 
 namespace Synapse_X_Remake
@@ -18,16 +20,54 @@ namespace Synapse_X_Remake
     public partial class MainWindow : Window
     {
         ExploitAPI module = new ExploitAPI();
+        static string ThemeFile = File.ReadAllText("./bin/Theme.json");
+        JObject json = JObject.Parse(ThemeFile);
 
         string SelectedPath = "./Scripts";
+        string currentVersion = File.ReadAllText("./bin/RemakeVersion.txt");
 
         public MainWindow()
         {
             InitializeComponent();
-            MEditor(Monaco);
-            loadThemes();
-            loadSettings();
-            loadScriptBox();
+            
+            try
+            {
+                MEditor(Monaco);
+                loadThemes();
+                loadSettings();
+                loadScriptBox();
+                runAttachedDetector();
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private void runAttachedDetector()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += AttachedDetectorTick;
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Start();
+        }
+
+        private void AttachedDetectorTick(object sender, EventArgs e)
+        {
+            if (module.isAPIAttached() == true)
+            {
+                var Header = json["Main"]["Header"];
+                TitleBox.Text = $"{Header["Title"].ToString()}-{currentVersion} (Attached)";
+            }
+            else
+            {
+                var Header = json["Main"]["Header"];
+                TitleBox.Text = $"{Header["Title"].ToString()}-{currentVersion} (Not Attached)";
+            }
         }
 
         private void loadSettings()
@@ -55,40 +95,69 @@ namespace Synapse_X_Remake
         private void loadThemes()
         {
             BrushConverter converter = new BrushConverter();
-            string ThemeFile = File.ReadAllText("./bin/Theme.json");
-            JObject json = JObject.Parse(ThemeFile);
 
-            var execute = json["Main"]["Execute"];
+            var background = json["Main"];
+            this.Background = (Brush)converter.ConvertFrom(background["Background"].ToString());
+
+            var execute = json["Main"]["Buttons"]["Execute"];
             ExecuteButton.Background = (Brush)converter.ConvertFrom(execute["Background"].ToString());
             ExecuteButton.Foreground = (Brush)converter.ConvertFrom(execute["Foreground"].ToString());
 
-            var Clear = json["Main"]["Clear"];
+            var Clear = json["Main"]["Buttons"]["Clear"];
             ClearButton.Background = (Brush)converter.ConvertFrom(Clear["Background"].ToString());
             ClearButton.Foreground = (Brush)converter.ConvertFrom(Clear["Foreground"].ToString());
 
-            var Open = json["Main"]["Open"];
+            var Open = json["Main"]["Buttons"]["Open"];
             OpenFileButton.Background = (Brush)converter.ConvertFrom(Open["Background"].ToString());
             OpenFileButton.Foreground = (Brush)converter.ConvertFrom(Open["Foreground"].ToString());
 
-            var ExecuteFile = json["Main"]["ExecuteFile"];
+            var ExecuteFile = json["Main"]["Buttons"]["ExecuteFile"];
             ExecuteFileButton.Background = (Brush)converter.ConvertFrom(ExecuteFile["Background"].ToString());
             ExecuteFileButton.Foreground = (Brush)converter.ConvertFrom(ExecuteFile["Foreground"].ToString());
 
-            var Save = json["Main"]["Save"];
+            var Save = json["Main"]["Buttons"]["Save"];
             SaveFileButton.Background = (Brush)converter.ConvertFrom(Save["Background"].ToString());
             SaveFileButton.Foreground = (Brush)converter.ConvertFrom(Save["Foreground"].ToString());
 
-            var Options = json["Main"]["Options"];
+            var Options = json["Main"]["Buttons"]["Options"];
             OptionsButton.Background = (Brush)converter.ConvertFrom(Options["Background"].ToString());
             OptionsButton.Foreground = (Brush)converter.ConvertFrom(Options["Foreground"].ToString());
 
-            var Attach = json["Main"]["Attach"];
+            var Attach = json["Main"]["Buttons"]["Attach"];
             AttachButton.Background = (Brush)converter.ConvertFrom(Attach["Background"].ToString());
             AttachButton.Foreground = (Brush)converter.ConvertFrom(Attach["Foreground"].ToString());
 
-            var ScriptHub = json["Main"]["ScriptHub"];
+            var ScriptHub = json["Main"]["Buttons"]["ScriptHub"];
             ScriptHubButton.Background = (Brush)converter.ConvertFrom(ScriptHub["Background"].ToString());
             ScriptHubButton.Foreground = (Brush)converter.ConvertFrom(ScriptHub["Foreground"].ToString());
+
+            var Header = json["Main"]["Header"];
+            Uri uri = new Uri(Header["Logo"].ToString(), UriKind.Absolute);
+
+            BitmapImage logo = new BitmapImage();
+            logo.DownloadProgress += delegate (object sender, DownloadProgressEventArgs e)
+            {
+                TitleBox.Text = $"{Header["Title"]} - {currentVersion} {e.Progress}";
+            };
+            logo.DownloadCompleted += delegate (object sender, EventArgs e)
+            {
+                TitleBox.Text = $"{Header["Title"]} - {currentVersion}";
+            };
+
+            logo.BeginInit();
+            logo.UriSource = uri;
+            logo.EndInit();
+            IconBox.Source = logo;
+
+            TopBox.Background = (Brush)converter.ConvertFrom(Header["Background"].ToString());
+
+            var Exit = json["Main"]["Header"]["Buttons"]["Exit"];
+            CloseButton.Background = (Brush)converter.ConvertFrom(Exit["Background"].ToString());
+            CloseButton.Foreground = (Brush)converter.ConvertFrom(Exit["Foreground"].ToString());
+
+            var Minimize = json["Main"]["Header"]["Buttons"]["Minimize"];
+            MiniButton.Background = (Brush)converter.ConvertFrom(Minimize["Background"].ToString());
+            MiniButton.Foreground = (Brush)converter.ConvertFrom(Minimize["Foreground"].ToString());
         }
 
         private void MEditor(System.Windows.Controls.WebBrowser wb)
@@ -109,7 +178,11 @@ namespace Synapse_X_Remake
             }
             catch (Exception error)
             {
-                System.Windows.MessageBox.Show(error.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
             }
             wb.Navigate(string.Format("file:///{0}/bin/editor.html", System.IO.Directory.GetCurrentDirectory()));
         }
@@ -187,7 +260,7 @@ namespace Synapse_X_Remake
                     }
                     else
                     {
-                        module.LegacyLaunchExploit();
+                        module.LaunchExploit();
                     }
                 }
             }
@@ -199,15 +272,26 @@ namespace Synapse_X_Remake
                 }
                 else
                 {
-                    module.LegacyLaunchExploit();
+                    module.LaunchExploit();
                 }
             }
         }
 
         private void ScriptHubButton_Click(object sender, RoutedEventArgs e)
         {
-            ScriptHubWindow scriptHubWindow = new ScriptHubWindow();
-            scriptHubWindow.ShowDialog();
+            try
+            {
+                ScriptHubWindow scriptHubWindow = new ScriptHubWindow();
+                scriptHubWindow.Show();
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
         }
 
         private void ExecuteItem_Click(object sender, RoutedEventArgs e)
