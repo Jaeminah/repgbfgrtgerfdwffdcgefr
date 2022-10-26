@@ -19,7 +19,7 @@ namespace Synapse_X_Remake
     {
         ExploitAPI exploit = new ExploitAPI();
 
-        public string binFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867605/bin.zip";
+        public string binFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867639/bin.zip";
         public string ScriptsFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866724/Scripts.zip";
         public string versionCheckerFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867386/VersionChecker.zip";
 
