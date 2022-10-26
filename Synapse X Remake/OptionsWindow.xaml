@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Closing="Window_Closing"
         MouseDown="Window_MouseDown" Icon="Resources/Synapse X Logo.ico" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" Height="350" Width="327" Background="#FF333333">
+        WindowStyle="None" Height="398" Width="327" Background="#FF333333">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,11 +29,14 @@
         <CheckBox x:Name="KillRoblox" Checked="KillRoblox_Checked" Content="Kill Roblox" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Foreground="White" Margin="119,68,0,0"/>
         <CheckBox x:Name="TopMostBox" Click="TopMostBox_Click" Checked="TopMostBox_Checked" Unchecked="TopMostBox_Unchecked" Content="Top Most" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Foreground="White" Margin="119,91,0,0"/>
 
-        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C"/>
-        <Button x:Name="CustomFPSButton" Click="CustomFPSButton_Click" Content="Set Custom FPS" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="0,154,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C"/>
+        <CheckBox x:Name="OldEditorCheckBox" Click="OldEditorCheckBox_Click" Checked="OldEditorCheckBox_Checked" Unchecked="OldEditorCheckBox_Unchecked" Content="Use Old Editor" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Foreground="White" Margin="119,115,0,0"/>
 
-        <Grid VerticalAlignment="Top" Height="112" Grid.Row="1" Margin="10,198,10,0">
+        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,151,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C" HorizontalAlignment="Left"/>
+        <Button x:Name="CustomFPSButton" Click="CustomFPSButton_Click" Content="Set Custom FPS" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,186,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C" HorizontalAlignment="Left"/>
+
+        <Grid VerticalAlignment="Top" Height="128" Grid.Row="1" Margin="10,221,10,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -41,17 +44,31 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Project Info" Foreground="White" FontSize="16px" FontWeight="DemiBold" Grid.Row="0"/>
-            <TextBlock Text="Developer: Charlzk/Charliezkie - Solo Developer" Foreground="White" Margin="0 5 0 0" Grid.Row="1"/>
-            <TextBlock Text="Release Date: May 31, 2022" Foreground="White" Margin="0 5 0 0" Grid.Row="2"/>
-            <TextBlock Text="License: GNU General Public License v3.0" Foreground="White" Margin="0 5 0 0" Grid.Row="3"/>
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="1" Margin="0 5 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Version: " Foreground="White" Grid.Column="0"/>
+                <TextBlock x:Name="VersionStatusBox" Text="Null " Foreground="OrangeRed" Grid.Column="1"/>
+                <TextBlock x:Name="ReleaseLinkBox" Grid.Column="2" Visibility="Visible">
+                    <Hyperlink x:Name="ReleaseHyperLinkBox" Click="ReleaseHyperLinkBox_Click">
+                        <TextBlock Text="Download Latest"/>
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+            <TextBlock Text="Developer: Charlzk/Charliezkie - Solo Developer" Foreground="White" Margin="0 5 0 0" Grid.Row="2"/>
+            <TextBlock Text="Release Date: May 31, 2022" Foreground="White" Margin="0 5 0 0" Grid.Row="3"/>
+            <TextBlock Text="License: GNU General Public License v3.0" Foreground="White" Margin="0 5 0 0" Grid.Row="4"/>
+            <Grid Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Source Code: " Foreground="White" Margin="0 5 0 0" Grid.Column="0"/>
                 <TextBlock Foreground="White" Margin="0 5 0 0" Grid.Column="1">
-                    <Hyperlink NavigateUri="https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version" RequestNavigate="Hyperlink_RequestNavigate">
+                    <Hyperlink x:Name="SourceCodeBox" Click="SourceCodeBox_Click">
                         Github/Charlzk05
                     </Hyperlink>
                 </TextBlock>

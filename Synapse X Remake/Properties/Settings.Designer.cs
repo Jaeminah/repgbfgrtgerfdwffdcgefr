@@ -37,13 +37,27 @@ namespace Synapse_X_Remake.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("print(\"Synapse X Remake By Charlzk\")\r\n\r\n-- Source Code: github.com/Charlzk05/Syna" +
+            "pse-X-Remake-Synapse-X-Free-Version\r\n-- License: GNU General Public License v3.0" +
+            "")]
         public string EditorSave {
             get {
                 return ((string)(this["EditorSave"]));
             }
             set {
                 this["EditorSave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OldEditor {
+            get {
+                return ((bool)(this["OldEditor"]));
+            }
+            set {
+                this["OldEditor"] = value;
             }
         }
     }

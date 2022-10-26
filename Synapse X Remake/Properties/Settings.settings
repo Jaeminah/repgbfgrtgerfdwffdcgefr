@@ -6,7 +6,13 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="EditorSave" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">print("Synapse X Remake By Charlzk")
+
+-- Source Code: github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version
+-- License: GNU General Public License v3.0</Value>
+    </Setting>
+    <Setting Name="OldEditor" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

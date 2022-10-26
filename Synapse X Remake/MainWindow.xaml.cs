@@ -1,11 +1,10 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -23,13 +22,15 @@ namespace Synapse_X_Remake
         static string ThemeFile = File.ReadAllText("./bin/Theme.json");
         JObject json = JObject.Parse(ThemeFile);
 
-        string SelectedPath = "./Scripts";
-        string currentVersion = File.ReadAllText("./bin/RemakeVersion.txt");
+        static string SelectedPath = "./Scripts";
+        static string currentVersion = File.ReadAllText("./bin/RemakeVersion.txt");
+        static string AceEditor = "file:///{0}/bin/AceEditor/editor.html";
+        static string MonacoEditor = "file:///{0}/bin/MonacoEditor/editor.html";
 
         public MainWindow()
         {
             InitializeComponent();
-            
+
             try
             {
                 MEditor(Monaco);
@@ -61,12 +62,12 @@ namespace Synapse_X_Remake
             if (module.isAPIAttached() == true)
             {
                 var Header = json["Main"]["Header"];
-                TitleBox.Text = $"{Header["Title"].ToString()}-{currentVersion} (Attached)";
+                TitleBox.Text = $"{Header["Title"]["Text"].ToString()}-{currentVersion} (Attached)";
             }
             else
             {
                 var Header = json["Main"]["Header"];
-                TitleBox.Text = $"{Header["Title"].ToString()}-{currentVersion} (Not Attached)";
+                TitleBox.Text = $"{Header["Title"]["Text"].ToString()}-{currentVersion} (Not Attached)";
             }
         }
 
@@ -95,6 +96,11 @@ namespace Synapse_X_Remake
         private void loadThemes()
         {
             BrushConverter converter = new BrushConverter();
+
+            var ListBox = json["Main"]["ScriptBox"];
+            ScriptBox.Background = (Brush)converter.ConvertFrom(ListBox["Background"].ToString());
+            ScriptBox.BorderBrush = (Brush)converter.ConvertFrom(ListBox["Background"].ToString());
+            ScriptBox.Foreground = (Brush)converter.ConvertFrom(ListBox["Foreground"].ToString());
 
             var background = json["Main"];
             this.Background = (Brush)converter.ConvertFrom(background["Background"].ToString());
@@ -134,14 +140,16 @@ namespace Synapse_X_Remake
             var Header = json["Main"]["Header"];
             Uri uri = new Uri(Header["Logo"].ToString(), UriKind.Absolute);
 
+            TitleBox.Foreground = (Brush)converter.ConvertFrom(Header["Title"]["Foreground"].ToString());
+
             BitmapImage logo = new BitmapImage();
             logo.DownloadProgress += delegate (object sender, DownloadProgressEventArgs e)
             {
-                TitleBox.Text = $"{Header["Title"]} - {currentVersion} {e.Progress}";
+                TitleBox.Text = $"{Header["Title"]["Text"]} - {currentVersion} {e.Progress}";
             };
             logo.DownloadCompleted += delegate (object sender, EventArgs e)
             {
-                TitleBox.Text = $"{Header["Title"]} - {currentVersion}";
+                TitleBox.Text = $"{Header["Title"]["Text"]} - {currentVersion}";
             };
 
             logo.BeginInit();
@@ -160,7 +168,7 @@ namespace Synapse_X_Remake
             MiniButton.Foreground = (Brush)converter.ConvertFrom(Minimize["Foreground"].ToString());
         }
 
-        private void MEditor(System.Windows.Controls.WebBrowser wb)
+        private void MEditor(WebBrowser wb)
         {
             WebClient wc = new WebClient();
             wc.Proxy = null;
@@ -184,7 +192,15 @@ namespace Synapse_X_Remake
                     Application.Current.Shutdown();
                 }
             }
-            wb.Navigate(string.Format("file:///{0}/bin/editor.html", System.IO.Directory.GetCurrentDirectory()));
+
+            if (Convert.ToBoolean(Properties.Settings.Default["OldEditor"]) == true)
+            {
+                wb.Navigate(string.Format(MonacoEditor, System.IO.Directory.GetCurrentDirectory()));
+            }
+            else
+            {
+                wb.Navigate(string.Format(AceEditor, System.IO.Directory.GetCurrentDirectory()));
+            }
         }
 
         private void ExecuteButton_Click(object sender, RoutedEventArgs e)
@@ -316,7 +332,7 @@ namespace Synapse_X_Remake
         private void ChangeFolderItem_Click(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.FolderBrowserDialog folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
-            
+
             if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 SelectedPath = folderBrowser.SelectedPath;
@@ -398,17 +414,31 @@ namespace Synapse_X_Remake
 
         private void Monaco_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            Monaco.InvokeScript("SetText", new object[]
+            try
             {
-                Properties.Settings.Default["EditorSave"].ToString()
-            });
+                Monaco.InvokeScript("SetText", new object[]
+                {
+                    Properties.Settings.Default["EditorSave"].ToString()
+                });
+            }
+            catch
+            {
+
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            object obj = Monaco.InvokeScript("GetText", new string[0]);
-            Properties.Settings.Default["EditorSave"] = obj.ToString();
-            Properties.Settings.Default.Save();
+            try
+            {
+                object obj = Monaco.InvokeScript("GetText", new string[0]);
+                Properties.Settings.Default["EditorSave"] = obj.ToString();
+                Properties.Settings.Default.Save();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

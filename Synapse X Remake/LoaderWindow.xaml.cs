@@ -1,12 +1,14 @@
-﻿using System;
-using System.Net;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.IO.Compression;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WeAreDevs_API;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace Synapse_X_Remake
 {
@@ -15,12 +17,11 @@ namespace Synapse_X_Remake
     /// </summary>
     public partial class LoaderWindow : Window
     {
-
-        DispatcherTimer Timer = new DispatcherTimer();
         ExploitAPI exploit = new ExploitAPI();
 
-        public string binFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843577/bin.zip";
-        public string ScriptsFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9843565/Scripts.zip";
+        public string binFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867605/bin.zip";
+        public string ScriptsFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866724/Scripts.zip";
+        public string versionCheckerFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867386/VersionChecker.zip";
 
         public LoaderWindow()
         {
@@ -28,7 +29,7 @@ namespace Synapse_X_Remake
 
             try
             {
-                CheckNDownload();
+                checkVersion();
             }
             catch (Exception error)
             {
@@ -38,6 +39,79 @@ namespace Synapse_X_Remake
                     Application.Current.Shutdown();
                 }
             }
+        }
+
+        private void checkVersion()
+        {
+            if (File.Exists("./VersionChecker.exe"))
+            {
+                versionCheck();
+            }
+            else
+            {
+                var option = MessageBox.Show("Would you like to install the Version Checker?", "Version Checker", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (option == MessageBoxResult.Yes)
+                {
+                    using (WebClient client = new WebClient())
+                    {
+                        Uri uri = new Uri(versionCheckerFileUrl, UriKind.Absolute);
+                        client.DownloadProgressChanged += VersionCheckerDownloadProgress;
+                        client.DownloadFileCompleted += VersionCheckerDownloadCompleted;
+                        client.DownloadFileAsync(uri, "./VersionChecker.zip");
+                    }
+                }
+                else
+                {
+                    versionCheck();
+                }
+            }
+        }
+
+        private void versionCheck()
+        {
+            if (File.Exists("./bin/VersionCheck.json"))
+            {
+                string CurrentVersion = File.ReadAllText("./bin/RemakeVersion.txt");
+                string VersionCheckFile = File.ReadAllText("./bin/VersionCheck.json");
+                JObject json = JObject.Parse(VersionCheckFile);
+
+                if (CurrentVersion == json["Github"]["Latest Version"].ToString())
+                {
+                    TitleBox.Text += $"({json["Message"].ToString()})";
+                }
+                else
+                {
+                    TitleBox.Text += $"({json["Message"].ToString()})";
+
+                    var option = MessageBox.Show("Would you like to install the latest version?", $"You're not up to date", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (option == MessageBoxResult.Yes)
+                    {
+                        Process.Start(json["Github"]["Release Link"].ToString());
+                    }
+                }
+
+                CheckNDownload();
+            }
+            else
+            {
+                CheckNDownload();
+            }
+        }
+
+        private void VersionCheckerDownloadProgress (object sender, DownloadProgressChangedEventArgs e)
+        {
+            StatusBox.Content = $"Downloading Version Checker ... {e.ProgressPercentage}%";
+            ProgressBox.Value = e.ProgressPercentage;
+        }
+
+        private void VersionCheckerDownloadCompleted (object sender, EventArgs e)
+        {
+            ZipFile.ExtractToDirectory("./VersionChecker.zip", "./");
+            File.Delete("./VersionChecker.zip");
+            StatusBox.Content = "Done!";
+            CheckNDownload();
         }
 
         private void CheckNDownload()
@@ -224,7 +298,7 @@ namespace Synapse_X_Remake
                 {
                     ZipFile.ExtractToDirectory("./Scripts.zip", "./");
                     File.Delete("./Scripts.zip");
-
+                    
                     this.Hide();
                     MainWindow main = new MainWindow();
                     main.Show();
@@ -238,6 +312,12 @@ namespace Synapse_X_Remake
                     Application.Current.Shutdown();
                 }
             }
+        }
+
+        private void MonacoDownloadProgressChanged (object sender, DownloadProgressChangedEventArgs e)
+        {
+            StatusBox.Content = $"Downloading Old Editor ... {e.ProgressPercentage}%";
+            ProgressBox.Value = e.ProgressPercentage;
         }
     }
 }

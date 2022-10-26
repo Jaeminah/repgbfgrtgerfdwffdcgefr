@@ -1,9 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using WeAreDevs_API;
+using Newtonsoft.Json.Linq;
 
 namespace Synapse_X_Remake
 {
@@ -21,6 +22,7 @@ namespace Synapse_X_Remake
             try
             {
                 loadSettings();
+                CheckVersion();
             }
             catch (Exception error)
             {
@@ -32,10 +34,32 @@ namespace Synapse_X_Remake
             }
         }
 
+        private void CheckVersion()
+        {
+            if (File.Exists("./bin/VersionCheck.json"))
+            {
+                string RemakeVersionFile = File.ReadAllText("./bin/RemakeVersion.txt");
+                string VersionCheckFile = File.ReadAllText("./bin/VersionCheck.json");
+                JObject json = JObject.Parse(VersionCheckFile);
+
+                if (RemakeVersionFile == json["Github"]["Latest Version"].ToString())
+                {
+                    VersionStatusBox.Text = $"{json["Message"].ToString()} ";
+                    ReleaseLinkBox.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    VersionStatusBox.Text = "You're not up to date ";
+                    ReleaseLinkBox.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         private void loadSettings()
         {
             this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
             TopMostBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
+            OldEditorCheckBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["OldEditor"].ToString());
         }
 
         private void UnlockBox_Checked(object sender, RoutedEventArgs e)
@@ -143,9 +167,53 @@ namespace Synapse_X_Remake
             Properties.Settings.Default.Save();
         }
 
-        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        private void OldEditorCheckBox_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
+            if (OldEditorCheckBox.IsChecked == true)
+            {
+                var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart require", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (restart == MessageBoxResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (restart == MessageBoxResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private void OldEditorCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default["OldEditor"] = true;
+        }
+
+        private void OldEditorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default["OldEditor"] = false;
+        }
+
+        private void ReleaseHyperLinkBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists("./bin/VersionCheck.json"))
+            {
+                string VersionCheckFile = File.ReadAllText("./bin/VersionCheck.json");
+                JObject json = JObject.Parse(VersionCheckFile);
+
+                Process.Start(json["Github"]["Release Link"].ToString());
+                e.Handled = true;
+            }
+        }
+
+        private void SourceCodeBox_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version");
             e.Handled = true;
         }
     }
