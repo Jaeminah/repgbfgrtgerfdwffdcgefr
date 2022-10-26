@@ -5,6 +5,9 @@
 - [bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9861656/bin.zip)
 - [Scripts.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9861658/Scripts.zip)
 
+### Old editor file
+
+[monaco.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866388/monaco.zip)
 
 ### Logo
 ![Synapse X Logo](https://user-images.githubusercontent.com/104715127/197786421-4b842674-14a3-4412-bda7-47c3e9da7bd2.png)
