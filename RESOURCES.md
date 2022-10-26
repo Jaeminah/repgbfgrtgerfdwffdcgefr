@@ -12,6 +12,10 @@
 
 <hr>
 
+## Version Checker
+
+- [VersionChecker.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867386/VersionChecker.zip)
+
 ### Editor Files
 
 - [AceEditor.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866479/AceEditor.zip)
