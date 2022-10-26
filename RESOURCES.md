@@ -10,6 +10,8 @@
 - [bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9861656/bin.zip)
 - [Scripts.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9861658/Scripts.zip)
 
+<hr>
+
 ### Editor Files
 
 - [AceEditor.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866479/AceEditor.zip)
