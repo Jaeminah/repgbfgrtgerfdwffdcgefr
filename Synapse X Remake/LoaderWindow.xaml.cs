@@ -78,11 +78,11 @@ namespace Synapse_X_Remake
 
                 if (CurrentVersion == json["Github"]["Latest Version"].ToString())
                 {
-                    TitleBox.Text += $"({json["Message"].ToString()})";
+                    TitleBox.Text += $" ({json["Message"].ToString()})";
                 }
                 else
                 {
-                    TitleBox.Text += $"({json["Message"].ToString()})";
+                    TitleBox.Text += $" ({json["Message"].ToString()})";
 
                     var option = MessageBox.Show("Would you like to install the latest version?", $"You're not up to date", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -118,15 +118,25 @@ namespace Synapse_X_Remake
         {
             if (exploit.IsUpdated() == true)
             {
-
                 if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
                 {
                     StatusBox.Content = "Done!";
                     ProgressBox.Value = 100;
 
-                    this.Hide();
-                    MainWindow main = new MainWindow();
-                    main.Show();
+                    try
+                    {
+                        this.Hide();
+                        MainWindow main = new MainWindow();
+                        main.Show();
+                    }
+                    catch (Exception LoadingError)
+                    {
+                        var option = MessageBox.Show($"{LoadingError.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                        if (option == MessageBoxResult.No)
+                        {
+                            Application.Current.Shutdown();
+                        }
+                    }
                 }
                 else
                 {

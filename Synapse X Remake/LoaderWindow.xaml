@@ -23,7 +23,7 @@
 
         <Grid Name="TopBox" HorizontalAlignment="Left" Height="30" Background="#FF3C3C3C" VerticalAlignment="Center" Width="418"/>
 
-        <TextBlock Name="TitleBox" Text="Synapse X Remake - Loader " HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+        <TextBlock Name="TitleBox" Text="Synapse X Remake - Loader" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
         <Image Name="IconBox" Source="Resources/Synapse X Logo.ico" Height="24" Width="24" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Center"/>
 
         <Label Name="StatusBox" Content="Loading ..." HorizontalAlignment="Center" Margin="0,10.2,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" FontSize="14"/>

@@ -62,12 +62,12 @@ namespace Synapse_X_Remake
             if (module.isAPIAttached() == true)
             {
                 var Header = json["Main"]["Header"];
-                TitleBox.Text = $"{Header["Title"]["Text"].ToString()}-{currentVersion} (Attached)";
+                TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Attached)";
             }
             else
             {
                 var Header = json["Main"]["Header"];
-                TitleBox.Text = $"{Header["Title"]["Text"].ToString()}-{currentVersion} (Not Attached)";
+                TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Not Attached)";
             }
         }
 
@@ -258,8 +258,19 @@ namespace Synapse_X_Remake
 
         private void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            OptionsWindow optionsWindow = new OptionsWindow();
-            optionsWindow.ShowDialog();
+            try
+            {
+                OptionsWindow optionsWindow = new OptionsWindow();
+                optionsWindow.Show();
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
+            }
         }
 
         private void AttachButton_Click(object sender, RoutedEventArgs e)

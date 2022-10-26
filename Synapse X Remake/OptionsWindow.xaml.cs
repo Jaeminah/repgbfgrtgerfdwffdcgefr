@@ -128,7 +128,6 @@ namespace Synapse_X_Remake
                 var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart require", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (restart == MessageBoxResult.Yes)
                 {
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                     Application.Current.Shutdown();
                 }
             }
@@ -137,7 +136,6 @@ namespace Synapse_X_Remake
                 var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (restart == MessageBoxResult.Yes)
                 {
-                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
                     Application.Current.Shutdown();
                 }
             }
