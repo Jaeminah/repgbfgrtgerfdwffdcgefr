@@ -2,8 +2,8 @@
 
 ### Synapse X Remake v1.0.5 Resources
 
-[bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866722/bin.zip)
-[Scripts.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866724/Scripts.zip)
+- [bin.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866722/bin.zip)
+- [Scripts.zip](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866724/Scripts.zip)
 
 ### Synapse X Remake - v1.0.4-a.1 Resources
 
