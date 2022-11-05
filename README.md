@@ -1,5 +1,5 @@
 # Synapse X Remake (Synapse X Free Version)
-[![image](https://img.shields.io/github/v/release/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/releases/tag/v1.0.5)
+[![image](https://img.shields.io/github/v/release/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/releases/tag/v1.0.6)
 
 Using [Synapse X](https://x.synapse.to/) UI Source code and rebuild it with [WeAreDevs API](https://wearedevs.net/d/Exploit%20API)
 
