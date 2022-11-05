@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WeAreDevs_API;
+using KrnlAPI;
 
 namespace Synapse_X_Remake
 {
@@ -17,10 +18,11 @@ namespace Synapse_X_Remake
     /// </summary>
     public partial class LoaderWindow : Window
     {
-        ExploitAPI exploit = new ExploitAPI();
+        ExploitAPI exploit = new ExploitAPI(); // WeAreDevs
+        KrnlApi krnl = new KrnlApi(); // Krnl
 
-        public string binFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867639/bin.zip";
-        public string ScriptsFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9866724/Scripts.zip";
+        public string binFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.6/bin.zip";
+        public string ScriptsFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.6/Scripts.zip";
         public string versionCheckerFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867386/VersionChecker.zip";
 
         public LoaderWindow()
@@ -116,8 +118,9 @@ namespace Synapse_X_Remake
 
         private void CheckNDownload()
         {
-            if (exploit.IsUpdated() == true)
+            if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
             {
+                krnl.Initialize();
                 if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
                 {
                     StatusBox.Content = "Done!";
@@ -161,18 +164,27 @@ namespace Synapse_X_Remake
             }
             else
             {
-                var msgbox = MessageBox.Show("WeAreDevs is not yet updated, Are you sure you want continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Error);
-
-                if (msgbox == MessageBoxResult.Yes)
+                if (exploit.IsUpdated() == true)
                 {
                     if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
                     {
                         StatusBox.Content = "Done!";
                         ProgressBox.Value = 100;
 
-                        this.Hide();
-                        MainWindow main = new MainWindow();
-                        main.Show();
+                        try
+                        {
+                            this.Hide();
+                            MainWindow main = new MainWindow();
+                            main.Show();
+                        }
+                        catch (Exception LoadingError)
+                        {
+                            var option = MessageBox.Show($"{LoadingError.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                            if (option == MessageBoxResult.No)
+                            {
+                                Application.Current.Shutdown();
+                            }
+                        }
                     }
                     else
                     {
@@ -197,7 +209,44 @@ namespace Synapse_X_Remake
                 }
                 else
                 {
-                    Application.Current.Shutdown();
+                    var msgbox = MessageBox.Show("WeAreDevs is not yet updated, Are you sure you want continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Error);
+
+                    if (msgbox == MessageBoxResult.Yes)
+                    {
+                        if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
+                        {
+                            StatusBox.Content = "Done!";
+                            ProgressBox.Value = 100;
+
+                            this.Hide();
+                            MainWindow main = new MainWindow();
+                            main.Show();
+                        }
+                        else
+                        {
+                            try
+                            {
+                                using (var client = new WebClient())
+                                {
+                                    client.DownloadProgressChanged += binFileDownloadProgress;
+                                    client.DownloadFileCompleted += binFileDownloadComplete;
+                                    client.DownloadFileAsync(new Uri(binFileUrl), "./bin.zip");
+                                }
+                            }
+                            catch (Exception error)
+                            {
+                                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                                if (option == MessageBoxResult.No)
+                                {
+                                    Application.Current.Shutdown();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Application.Current.Shutdown();
+                    }
                 }
             }
         }

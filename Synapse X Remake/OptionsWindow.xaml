@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="988589d2ad7cb75d9a78ef9cbe5c235f" ResizeMode="NoResize" Closing="Window_Closing"
         MouseDown="Window_MouseDown" Icon="Resources/Synapse X Logo.ico" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" Height="398" Width="327" Background="#FF333333">
+        WindowStyle="None" Height="415" Width="327" Background="#FF333333">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,10 +31,12 @@
 
         <CheckBox x:Name="OldEditorCheckBox" Click="OldEditorCheckBox_Click" Checked="OldEditorCheckBox_Checked" Unchecked="OldEditorCheckBox_Unchecked" Content="Use Old Editor" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Foreground="White" Margin="119,115,0,0"/>
 
-        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,151,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C" HorizontalAlignment="Left"/>
-        <Button x:Name="CustomFPSButton" Click="CustomFPSButton_Click" Content="Set Custom FPS" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,186,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C" HorizontalAlignment="Left"/>
+        <CheckBox x:Name="KrnlAPICheckBox" Click="KrnlAPICheckBox_Click" Checked="KrnlAPICheckBox_Checked" Unchecked="KrnlAPICheckBox_Unchecked" Content="Use KrnlAPI" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Top" FontSize="14" Foreground="White" Margin="0,139,0,0"/>
 
-        <Grid VerticalAlignment="Top" Height="128" Grid.Row="1" Margin="10,221,10,0">
+        <Button Name="CloseButton" Click="CloseButton_Click" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,174,0,0" Grid.Row="1" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="CustomFPSButton" Click="CustomFPSButton_Click" Content="Set Custom FPS" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Margin="8,209,0,0" Grid.Row="1" VerticalAlignment="Top" Width="307" Height="30" Foreground="White" Background="#FF3C3C3C" HorizontalAlignment="Left"/>
+
+        <Grid VerticalAlignment="Top" Height="128" Grid.Row="1" Margin="10,244,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

@@ -60,5 +60,17 @@ namespace Synapse_X_Remake.Properties {
                 this["OldEditor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KrnlAPI {
+            get {
+                return ((bool)(this["KrnlAPI"]));
+            }
+            set {
+                this["KrnlAPI"] = value;
+            }
+        }
     }
 }

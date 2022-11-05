@@ -60,6 +60,7 @@ namespace Synapse_X_Remake
             this.Topmost = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
             TopMostBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["TopMost"].ToString());
             OldEditorCheckBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["OldEditor"].ToString());
+            KrnlAPICheckBox.IsChecked = Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"].ToString());
         }
 
         private void UnlockBox_Checked(object sender, RoutedEventArgs e)
@@ -213,6 +214,38 @@ namespace Synapse_X_Remake
         {
             Process.Start("https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version");
             e.Handled = true;
+        }
+
+        private void KrnlAPICheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (KrnlAPICheckBox.IsChecked == true)
+            {
+                var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart require", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (restart == MessageBoxResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+            }
+            else
+            {
+                var restart = MessageBox.Show("Restart is require for changes to take effect.", "Restart needed", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (restart == MessageBoxResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
+            }
+        }
+
+        private void KrnlAPICheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default["KrnlAPI"] = true;
+        }
+
+        private void KrnlAPICheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default["KrnlAPI"] = false;
         }
     }
 }

@@ -1,0 +1,33 @@
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\Synapse X Remake.exe.config
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\Synapse X Remake.exe
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\Synapse X Remake.pdb
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\Newtonsoft.Json.dll
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\WeAreDevs_API.dll
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\Newtonsoft.Json.xml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.csproj.AssemblyReference.cache
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.csproj.SuggestedBindingRedirects.cache
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\CustomFPSWindow.g.cs
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\LoaderWindow.g.cs
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\MainWindow.g.cs
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\OptionsWindow.g.cs
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\ScriptHubWindow.g.cs
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\App.g.cs
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake_MarkupCompile.cache
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake_MarkupCompile.lref
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\App.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Resources\AppleStyleScrollBars.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Resources\CheckBoxesStyles.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\CustomFPSWindow.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\LoaderWindow.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\MainWindow.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\OptionsWindow.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Resources\RightCornerBoxRemover.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\ScriptHubWindow.baml
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.g.resources
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse_X_Remake.Properties.Resources.resources
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.csproj.GenerateResource.cache
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.csproj.CoreCompileInputs.cache
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.csproj.CopyComplete
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.exe
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\obj\Debug\Synapse X Remake.pdb
+C:\Users\charl\Desktop\Synapse-X-Remake-Synapse-X-Free-Version\Synapse X Remake\bin\Debug\KrnlAPI.dll

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WeAreDevs_API;
+using KrnlAPI;
 
 namespace Synapse_X_Remake
 {
@@ -18,6 +19,7 @@ namespace Synapse_X_Remake
         JObject json = JObject.Parse(jsonFile);
 
         ExploitAPI module = new ExploitAPI();
+        KrnlApi krnl = new KrnlApi();
 
         public ScriptHubWindow()
         {
@@ -60,7 +62,15 @@ namespace Synapse_X_Remake
                     using (WebClient client = new WebClient())
                     {
                         string content = client.DownloadString(json["Scripts"][ScriptBox.SelectedIndex]["Content"].ToString());
-                        module.SendLuaScript(content);
+
+                        if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
+                        {
+                            krnl.Execute(content);
+                        }
+                        else
+                        {
+                            module.SendLuaScript(content);
+                        };
                     }
                 }
                 catch (Exception error)

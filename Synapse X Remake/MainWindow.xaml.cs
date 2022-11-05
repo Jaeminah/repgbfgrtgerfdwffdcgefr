@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WeAreDevs_API;
+using KrnlAPI;
 
 namespace Synapse_X_Remake
 {
@@ -18,7 +19,9 @@ namespace Synapse_X_Remake
     /// </summary>
     public partial class MainWindow : Window
     {
-        ExploitAPI module = new ExploitAPI();
+        ExploitAPI module = new ExploitAPI(); // WeAreDevs
+        KrnlApi krnl = new KrnlApi(); // Krnl
+
         static string ThemeFile = File.ReadAllText("./bin/Theme.json");
         JObject json = JObject.Parse(ThemeFile);
 
@@ -59,15 +62,31 @@ namespace Synapse_X_Remake
 
         private void AttachedDetectorTick(object sender, EventArgs e)
         {
-            if (module.isAPIAttached() == true)
+            if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
             {
-                var Header = json["Main"]["Header"];
-                TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Attached)";
+                if (module.isAPIAttached() == true)
+                {
+                    var Header = json["Main"]["Header"];
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Attached)";
+                }
+                else
+                {
+                    var Header = json["Main"]["Header"];
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Attached)";
+                }
             }
             else
             {
-                var Header = json["Main"]["Header"];
-                TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Not Attached)";
+                if (module.isAPIAttached() == true)
+                {
+                    var Header = json["Main"]["Header"];
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (WeAreDevs Attached)";
+                }
+                else
+                {
+                    var Header = json["Main"]["Header"];
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (WeAreDevs Not Attached)";
+                }
             }
         }
 
@@ -241,7 +260,14 @@ namespace Synapse_X_Remake
             ef.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
             if (ef.ShowDialog() == true)
             {
-                module.SendLuaScript(File.ReadAllText(ef.FileName));
+                if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
+                {
+                    krnl.Execute(File.ReadAllText(ef.FileName));
+                }
+                else
+                {
+                    module.SendLuaScript(File.ReadAllText(ef.FileName));
+                }
             }
         }
 
@@ -275,11 +301,29 @@ namespace Synapse_X_Remake
 
         private void AttachButton_Click(object sender, RoutedEventArgs e)
         {
-            if (module.IsUpdated() == false)
+            if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
             {
-                var msgbox = MessageBox.Show("WeAreDevs is not yet updated, Are you sure you want continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                krnl.Inject();
+            }
+            else
+            {
+                if (module.IsUpdated() == false)
+                {
+                    var msgbox = MessageBox.Show("WeAreDevs is not yet updated, Are you sure you want continue?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Error);
 
-                if (msgbox == MessageBoxResult.Yes)
+                    if (msgbox == MessageBoxResult.Yes)
+                    {
+                        if (module.isAPIAttached() == true)
+                        {
+                            MessageBox.Show("Already Attached", "Exploit is running", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                        else
+                        {
+                            module.LaunchExploit();
+                        }
+                    }
+                }
+                else
                 {
                     if (module.isAPIAttached() == true)
                     {
@@ -289,17 +333,6 @@ namespace Synapse_X_Remake
                     {
                         module.LaunchExploit();
                     }
-                }
-            }
-            else
-            {
-                if (module.isAPIAttached() == true)
-                {
-                    MessageBox.Show("Already Attached", "Exploit is running", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    module.LaunchExploit();
                 }
             }
         }
@@ -323,20 +356,46 @@ namespace Synapse_X_Remake
 
         private void ExecuteItem_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ScriptBox.SelectedIndex != -1)
+            try
             {
-                module.SendLuaScript(File.ReadAllText($"{SelectedPath}/{ScriptBox.SelectedItem}"));
+                if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
+                {
+                    krnl.Execute(File.ReadAllText($"{SelectedPath}/{ScriptBox.SelectedItem}"));
+                }
+                else
+                {
+                    module.SendLuaScript(File.ReadAllText($"{SelectedPath}/{ScriptBox.SelectedItem}"));
+                }
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
             }
         }
 
         private void LoadItem_Click(object sender, RoutedEventArgs e)
         {
-            if (ScriptBox.SelectedIndex != -1)
+            try
             {
-                Monaco.InvokeScript("SetText", new object[1]
+                if (ScriptBox.SelectedIndex != -1)
                 {
+                    Monaco.InvokeScript("SetText", new object[1]
+                    {
                     File.ReadAllText($"{SelectedPath}/{ScriptBox.SelectedItem}")
-                });
+                    });
+                }
+            }
+            catch (Exception error)
+            {
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
+                {
+                    Application.Current.Shutdown();
+                }
             }
         }
 
@@ -387,38 +446,49 @@ namespace Synapse_X_Remake
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
+            try
             {
-                Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
-                sfd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
-
-                if (sfd.ShowDialog() == true)
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.S))
                 {
-                    File.WriteAllText(sfd.FileName, Monaco.InvokeScript("GetText", new object[0]).ToString());
-                }
-            }
-            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.F))
-            {
-                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
-                ofd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua";
+                    Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+                    sfd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua|All Files (*.*)|*.*";
 
-                if (ofd.ShowDialog() == true)
-                {
-                    string content = File.ReadAllText(ofd.FileName);
-                    Monaco.InvokeScript("SetText", new object[]
+                    if (sfd.ShowDialog() == true)
                     {
+                        File.WriteAllText(sfd.FileName, Monaco.InvokeScript("GetText", new object[0]).ToString());
+                    }
+                }
+                else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.F))
+                {
+                    Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                    ofd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua";
+
+                    if (ofd.ShowDialog() == true)
+                    {
+                        string content = File.ReadAllText(ofd.FileName);
+                        Monaco.InvokeScript("SetText", new object[]
+                        {
                         content
-                    });
+                        });
+                    }
+                }
+                else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.X))
+                {
+                    Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
+                    ofd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua";
+
+                    if (ofd.ShowDialog() == true)
+                    {
+                        File.ReadAllText(ofd.FileName);
+                    }
                 }
             }
-            else if (Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.X))
+            catch (Exception error)
             {
-                Microsoft.Win32.OpenFileDialog ofd = new Microsoft.Win32.OpenFileDialog();
-                ofd.Filter = "Txt Files (*.txt)|*.txt|Lua Files (*.lua)|*.lua";
-
-                if (ofd.ShowDialog() == true)
+                var option = MessageBox.Show($"{error.Message}\n\nDo you still want to continue?", "Error!", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (option == MessageBoxResult.No)
                 {
-                    File.ReadAllText(ofd.FileName);
+                    Application.Current.Shutdown();
                 }
             }
         }
