@@ -28,7 +28,7 @@
 
 ### Requirements for Developers (Visual Studio)
 - Universal Windows Platform Development
-- [.NET Framework 4.7.2 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
-- [.NET Framework 4.7.2 Targeting pack](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+- [.NET Framework 4.8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
+- [.NET Framework 4.8 Targeting pack](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
 
 ![image](https://user-images.githubusercontent.com/104715127/185756446-5e6b63ce-0ff9-47b0-b988-9a8c6e1f4674.png)
