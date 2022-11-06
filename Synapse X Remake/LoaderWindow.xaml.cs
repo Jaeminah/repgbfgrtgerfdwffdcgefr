@@ -21,8 +21,8 @@ namespace Synapse_X_Remake
         ExploitAPI exploit = new ExploitAPI(); // WeAreDevs
         KrnlApi krnl = new KrnlApi(); // Krnl
 
-        public string binFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.6/bin.zip";
-        public string ScriptsFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.6/Scripts.zip";
+        public string binFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.7/bin.zip";
+        public string ScriptsFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.7/Scripts.zip";
         public string versionCheckerFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867386/VersionChecker.zip";
 
         public LoaderWindow()
