@@ -72,7 +72,7 @@ namespace Synapse_X_Remake
                 else
                 {
                     var Header = json["Main"]["Header"];
-                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Attached)";
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Not Attached)";
                 }
             }
             else
@@ -224,11 +224,22 @@ namespace Synapse_X_Remake
 
         private void ExecuteButton_Click(object sender, RoutedEventArgs e)
         {
-            string scriptName = "GetText";
-            object[] args = new string[0];
-            object obj = Monaco.InvokeScript(scriptName, args);
-            string script = obj.ToString();
-            module.SendLuaScript(script);
+            if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
+            {
+                string scriptName = "GetText";
+                object[] args = new string[0];
+                object obj = Monaco.InvokeScript(scriptName, args);
+                string script = obj.ToString();
+                krnl.Execute(script);
+            }
+            else
+            {
+                string scriptName = "GetText";
+                object[] args = new string[0];
+                object obj = Monaco.InvokeScript(scriptName, args);
+                string script = obj.ToString();
+                module.SendLuaScript(script);
+            }
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
