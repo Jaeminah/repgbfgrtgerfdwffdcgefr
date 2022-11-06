@@ -1,5 +1,5 @@
 # Synapse X Remake (Synapse X Free Version)
-[![image](https://img.shields.io/github/v/release/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/releases/tag/v1.0.5)
+[![image](https://img.shields.io/github/v/release/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version)](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/releases/tag/v1.0.6)
 
 Using [Synapse X](https://x.synapse.to/) UI Source code and rebuild it with [WeAreDevs API](https://wearedevs.net/d/Exploit%20API)
 
@@ -11,15 +11,15 @@ Scroll Down for more information
 
 ## Requirements
 
-- [.NET Framework 4.7.2 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+- [.NET Framework 4.8 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
 
 ### For Developers (Visual Studio)
 
 How to contribute to the project - [CONTRIBUTION.md](https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/blob/main/CONTRIBUTION.md)
 
 - Universal Windows Platform Development
-- [.NET Framework 4.7.2 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
-- [.NET Framework 4.7.2 Targeting pack](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+- [.NET Framework 4.8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
+- [.NET Framework 4.8 Targeting pack](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
 
 ![image](https://user-images.githubusercontent.com/104715127/185756446-5e6b63ce-0ff9-47b0-b988-9a8c6e1f4674.png)
 
