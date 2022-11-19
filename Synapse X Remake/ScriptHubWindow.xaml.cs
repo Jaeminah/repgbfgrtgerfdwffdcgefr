@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using KrnlAPI;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Net;
@@ -6,7 +7,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using WeAreDevs_API;
-using KrnlAPI;
 
 namespace Synapse_X_Remake
 {

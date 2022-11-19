@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using KrnlAPI;
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
@@ -10,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using WeAreDevs_API;
-using KrnlAPI;
 
 namespace Synapse_X_Remake
 {
@@ -64,15 +64,24 @@ namespace Synapse_X_Remake
         {
             if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
             {
-                if (module.isAPIAttached() == true)
+                if (krnl.IsInitialized() == true)
                 {
                     var Header = json["Main"]["Header"];
-                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Attached)";
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Initialized)";
+
+                    if (krnl.IsInjected() == true)
+                    {
+                        TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Attached)";
+                    }
+                    else
+                    {
+                        TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Not Attached)";
+                    }
                 }
                 else
                 {
                     var Header = json["Main"]["Header"];
-                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Not Attached)";
+                    TitleBox.Text = $"{Header["Title"]["Text"].ToString()} - {currentVersion} (Krnl Not Initialized)";
                 }
             }
             else
@@ -314,7 +323,15 @@ namespace Synapse_X_Remake
         {
             if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
             {
-                krnl.Inject();
+                if (krnl.IsInitialized() == true)
+                {
+                    krnl.Inject();
+                }
+                else
+                {
+                    krnl.Initialize();
+                    krnl.Inject();
+                }
             }
             else
             {

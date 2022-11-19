@@ -4,12 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using WeAreDevs_API;
-using KrnlAPI;
 
 namespace Synapse_X_Remake
 {
@@ -19,9 +16,8 @@ namespace Synapse_X_Remake
     public partial class LoaderWindow : Window
     {
         ExploitAPI exploit = new ExploitAPI(); // WeAreDevs
-        KrnlApi krnl = new KrnlApi(); // Krnl
 
-        public string binFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.7/bin.zip";
+        public string binFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.8/bin.zip";
         public string ScriptsFileUrl = "https://raw.githubusercontent.com/Charlzk05/SynxRemakeResources/main/v1.0.7/Scripts.zip";
         public string versionCheckerFileUrl = "https://github.com/Charlzk05/Synapse-X-Remake-Synapse-X-Free-Version/files/9867386/VersionChecker.zip";
 
@@ -47,6 +43,10 @@ namespace Synapse_X_Remake
         {
             if (File.Exists("./VersionChecker.exe"))
             {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "VersionChecker.exe";
+                Process.Start(startInfo).WaitForExit();
+
                 versionCheck();
             }
             else
@@ -102,13 +102,13 @@ namespace Synapse_X_Remake
             }
         }
 
-        private void VersionCheckerDownloadProgress (object sender, DownloadProgressChangedEventArgs e)
+        private void VersionCheckerDownloadProgress(object sender, DownloadProgressChangedEventArgs e)
         {
             StatusBox.Content = $"Downloading Version Checker ... {e.ProgressPercentage}%";
             ProgressBox.Value = e.ProgressPercentage;
         }
 
-        private void VersionCheckerDownloadCompleted (object sender, EventArgs e)
+        private void VersionCheckerDownloadCompleted(object sender, EventArgs e)
         {
             ZipFile.ExtractToDirectory("./VersionChecker.zip", "./");
             File.Delete("./VersionChecker.zip");
@@ -120,7 +120,6 @@ namespace Synapse_X_Remake
         {
             if (Convert.ToBoolean(Properties.Settings.Default["KrnlAPI"]) == true)
             {
-                krnl.Initialize();
                 if (Directory.Exists("./bin") && Directory.Exists("./Scripts"))
                 {
                     StatusBox.Content = "Done!";
@@ -357,7 +356,7 @@ namespace Synapse_X_Remake
                 {
                     ZipFile.ExtractToDirectory("./Scripts.zip", "./");
                     File.Delete("./Scripts.zip");
-                    
+
                     this.Hide();
                     MainWindow main = new MainWindow();
                     main.Show();
@@ -373,7 +372,7 @@ namespace Synapse_X_Remake
             }
         }
 
-        private void MonacoDownloadProgressChanged (object sender, DownloadProgressChangedEventArgs e)
+        private void MonacoDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             StatusBox.Content = $"Downloading Old Editor ... {e.ProgressPercentage}%";
             ProgressBox.Value = e.ProgressPercentage;
