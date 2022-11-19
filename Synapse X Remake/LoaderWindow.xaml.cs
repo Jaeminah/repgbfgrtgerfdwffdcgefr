@@ -113,6 +113,7 @@ namespace Synapse_X_Remake
             ZipFile.ExtractToDirectory("./VersionChecker.zip", "./");
             File.Delete("./VersionChecker.zip");
             StatusBox.Content = "Done!";
+
             CheckNDownload();
         }
 

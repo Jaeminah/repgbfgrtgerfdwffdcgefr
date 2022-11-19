@@ -53,7 +53,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Version: " Foreground="White" Grid.Column="0"/>
-                <TextBlock x:Name="VersionStatusBox" Text="Please open the Version Checker First " Foreground="OrangeRed" Grid.Column="1"/>
+                <TextBlock x:Name="VersionStatusBox" Text="Please download the Version Checker First " Foreground="OrangeRed" Grid.Column="1"/>
                 <TextBlock x:Name="ReleaseLinkBox" Grid.Column="2" Visibility="Hidden">
                     <Hyperlink x:Name="ReleaseHyperLinkBox" Click="ReleaseHyperLinkBox_Click">
                         <TextBlock Text="Download Latest"/>

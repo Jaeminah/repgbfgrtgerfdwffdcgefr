@@ -36,22 +36,30 @@ namespace Synapse_X_Remake
 
         private void CheckVersion()
         {
-            if (File.Exists("./bin/VersionCheck.json"))
+            if (File.Exists("./VersionChecker.exe"))
             {
-                string RemakeVersionFile = File.ReadAllText("./bin/RemakeVersion.txt");
-                string VersionCheckFile = File.ReadAllText("./bin/VersionCheck.json");
-                JObject json = JObject.Parse(VersionCheckFile);
+                if (File.Exists("./bin/VersionCheck.json"))
+                {
+                    string RemakeVersionFile = File.ReadAllText("./bin/RemakeVersion.txt");
+                    string VersionCheckFile = File.ReadAllText("./bin/VersionCheck.json");
+                    JObject json = JObject.Parse(VersionCheckFile);
 
-                if (RemakeVersionFile == json["Github"]["Latest Version"].ToString())
-                {
-                    VersionStatusBox.Text = $"{json["Message"].ToString()} ";
-                    ReleaseLinkBox.Visibility = Visibility.Hidden;
+                    if (RemakeVersionFile == json["Github"]["Latest Version"].ToString())
+                    {
+                        VersionStatusBox.Text = $"{json["Message"].ToString()} ";
+                        ReleaseLinkBox.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        VersionStatusBox.Text = "You're not up to date ";
+                        ReleaseLinkBox.Visibility = Visibility.Visible;
+                    }
                 }
-                else
-                {
-                    VersionStatusBox.Text = "You're not up to date ";
-                    ReleaseLinkBox.Visibility = Visibility.Visible;
-                }
+            }
+            else
+            {
+                VersionStatusBox.Text = "Please download the Version Checker First ";
+                ReleaseLinkBox.Visibility = Visibility.Hidden;
             }
         }
 
