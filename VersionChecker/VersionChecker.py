@@ -5,7 +5,7 @@ def main():
     response = requests.get("https://github.com/Jaeminah/repgbfgrtgerfdwffdcgefr/tags")
     soup = BeautifulSoup(response.text, "html.parser")
     latest = soup.find_all("a", {"class":"Link--primary"})[0]
-    with open("./bin/RemakeVersion.txt", "r") as remakeVersion:
+    with open("./bin/Version.txt", "r") as remakeVersion:
         if (remakeVersion.read() == latest.text):
             output = {
                 "Github": {
